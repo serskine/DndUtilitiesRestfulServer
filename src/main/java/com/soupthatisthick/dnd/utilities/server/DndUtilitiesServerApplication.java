@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DnDUtilitiesServerApplication {
+public class DndUtilitiesServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DnDUtilitiesServerApplication.class, args);
+		SpringApplication.run(DndUtilitiesServerApplication.class, args);
 	}
 }

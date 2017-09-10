@@ -1,0 +1,1 @@
+-- This is the very first sql file used to define the schema
