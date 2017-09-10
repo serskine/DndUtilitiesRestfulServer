@@ -1,6 +1,8 @@
-package com.soupthatisthick.dnd.utilities.server.spring;
+package com.soupthatisthick.dnd.utilities.server;
 
 
+import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
+import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import de.codecentric.boot.admin.config.EnableAdminServer;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -28,12 +30,12 @@ import java.util.concurrent.Executor;
  * Created by Owner on 9/9/2017.
  */
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-@EnableJpaRepositories({"com.soupthatisthick.encounterbuilder.server.dnd.utilities.server.data.jpa.*"})
-@EntityScan({"com.soupthatisthick.encounterbuilder.server.dnd.utilities.server.data.jpa.*"})
-@ComponentScan({"com.soupthatisthick.encounterbuilder.server.dnd.utilities.server.*"})
+@EnableJpaRepositories({"com.soupthatisthick.dnd.utilities.server.data.jpa.*"})
+@EntityScan({"com.soupthatisthick.dnd.utilities.server.data.jpa.*"})
+@ComponentScan({"com.soupthatisthick.dnd.utilities.server.*"})
 @PropertySources({
-        @PropertySource("classpath:/com/soupthatisthick/encounterbuilder/server/dnd/utilities/server/config/application.properties"),
-        @PropertySource(value = "classpath:/com/soupthatisthick/encounterbuilder/server/dnd/utilities/server/config/application-test.properties", ignoreResourceNotFound = true),
+        @PropertySource("classpath:/com/soupthatisthick/dnd/utilities/server/config/application.properties"),
+        @PropertySource(value = "classpath:/com/soupthatisthick/dnd/utilities/server/config/application-test.properties", ignoreResourceNotFound = true),
         @PropertySource(value = "file:/opt/dnd-utilities-server/config/application-test.properties", ignoreResourceNotFound = true)
 })
 @EnableAdminServer
@@ -44,12 +46,15 @@ public class DndUtilitiesApplication extends SpringBootServletInitializer {
     private DataSource primaryDataSource;
 
     public static void main(String[] args) {
+        Logger.title("args");
+        Logger.info(JsonUtil.toJson(args,true));
+
         SpringApplication.run(DndUtilitiesApplication.class, args);
     }
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(DndUtilitiesApplication.class);
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(DndUtilitiesApplication.class);
     }
 
     @Bean
@@ -75,12 +80,13 @@ public class DndUtilitiesApplication extends SpringBootServletInitializer {
     @Bean(name = "liquibase")
     public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:/db/changelog/liquibase-changeLog.xml");
+        liquibase.setChangeLog("classpath:/db.changelog/liquibase-changeLog.xml");
         liquibase.setDataSource(dataSource());
+        Logger.info("Created liquibase for database versioning management.");
         return liquibase;
     }
 
-    @Bean(name = "datasource")
+    @Bean(name = "dataSource")
     public DataSource dataSource() {
         return primaryDataSource;
     }

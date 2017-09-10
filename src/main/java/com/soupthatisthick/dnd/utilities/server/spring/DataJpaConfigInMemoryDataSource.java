@@ -35,7 +35,7 @@ public class DataJpaConfigInMemoryDataSource {
         if (db==null) {
             Logger.warning("Failed to initialize the in-memory data source!");
         } else {
-            Logger.info("Initialized in-memory DB\n" + JsonUtil.toJson(db, true));
+            Logger.info("Initialized in-memory DB.");
             return db;
         }
 

@@ -1,7 +1,6 @@
 package com.soupthatisthick.dnd.utilities.server.util.text;
 
-import org.springframework.lang.Nullable;
-
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Collection;

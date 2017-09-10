@@ -2,8 +2,8 @@ package com.soupthatisthick.dnd.utilities.server.api.common;
 
 import com.soupthatisthick.dnd.utilities.server.service.common.BaseModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

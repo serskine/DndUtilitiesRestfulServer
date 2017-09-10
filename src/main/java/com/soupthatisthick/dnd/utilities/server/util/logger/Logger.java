@@ -1,8 +1,11 @@
 package com.soupthatisthick.dnd.utilities.server.util.logger;
 
 
+import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import com.soupthatisthick.dnd.utilities.server.util.text.Text;
-import org.springframework.lang.Nullable;
+
+import javax.annotation.Nullable;
+import java.io.Serializable;
 
 /**
  * Created by Owner on 1/29/2017.
@@ -178,5 +181,12 @@ public class Logger {
     public static final void title(String text, int rowLength, int depth)
     {
         Logger.info(Text.titleString(text,'*', '=', '|', ' ', rowLength), depth+1);
+    }
+
+    /**
+     * This will take any objects and print it's contents out in a pretty json format
+     */
+    public static final void json(Serializable object) {
+        info(JsonUtil.toJson(object, true), 1);
     }
 }

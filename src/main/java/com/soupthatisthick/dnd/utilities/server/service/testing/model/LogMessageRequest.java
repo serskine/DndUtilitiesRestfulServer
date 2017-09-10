@@ -2,8 +2,8 @@ package com.soupthatisthick.dnd.utilities.server.service.testing.model;
 
 import com.soupthatisthick.dnd.utilities.server.api.common.BaseRequest;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.lang.Nullable;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 
 /**
