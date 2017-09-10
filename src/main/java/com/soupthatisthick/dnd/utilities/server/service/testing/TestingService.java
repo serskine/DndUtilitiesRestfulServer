@@ -37,4 +37,33 @@ public class TestingService {
         }
 
     }
+
+    @Transactional
+    public void cleanDatabase() throws TestingServiceException {
+        Logger.info("Cleaning the database.");
+
+        try {
+
+        } catch (Exception e) {
+            throw new TestingServiceException(ErrorCode.TESTING_WIPE_DATABASE_FAILED, "Failed to clean the repositories.");
+        }
+    }
+
+    @Transactional
+    public void initDatabase() throws TestingServiceException {
+        Logger.info("Initializing the database data.");
+
+        try {
+
+        } catch (Exception e) {
+            throw new TestingServiceException(ErrorCode.TESTING_INIT_DATABASE_FAILED, "Failed to initialize the repositories.");
+        }
+    }
+
+    @Transactional
+    public void resetDatabase() throws TestingServiceException {
+        Logger.info("Resetting the database.");
+        cleanDatabase();
+        initDatabase();
+    }
 }

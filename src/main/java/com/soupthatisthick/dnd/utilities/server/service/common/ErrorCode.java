@@ -5,7 +5,9 @@ package com.soupthatisthick.dnd.utilities.server.service.common;
  */
 public enum ErrorCode {
     UNKNOWN_ERROR                           (ServiceId.UNKNOWN,     0),
-    TESTING_LOG_LEVEL_REQUIRED              (ServiceId.TESTING,     1)
+    TESTING_LOG_LEVEL_REQUIRED              (ServiceId.TESTING,     1),
+    TESTING_WIPE_DATABASE_FAILED            (ServiceId.TESTING,     2),
+    TESTING_INIT_DATABASE_FAILED            (ServiceId.TESTING,     3)
     ;
 
     private ServiceId serviceId;

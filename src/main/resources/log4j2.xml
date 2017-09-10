@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+                <PatternLayout pattern="[%d{IO8601}] [%-5p] [%t] %C{1} [%L]: %m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.soupthatisthick.dndutilities.server" level="trace"/>
+        <Root level="WARN">
+            <AppenderRef ref = "CONSOLE"/>
+        </Root>
+    </Loggers>
+</Configuration>
