@@ -11,14 +11,11 @@ import javax.validation.constraints.NotNull;
  */
 public class LogMessageRequest extends BaseRequest {
 
-    @NotEmpty
+    @NotNull
     private String message;
 
     @NotNull
     private LogLevel logLevel;
-
-    @Nullable
-    private Throwable throwable;
 
     // ------------------------------- GETTERS AND SETTERS ------------------------------- //
 
@@ -26,24 +23,14 @@ public class LogMessageRequest extends BaseRequest {
         return message;
     }
 
-    public void setMessage(@NotEmpty String message) {
+    public void setMessage(@NotNull String message) {
         this.message = message;
     }
-
     public LogLevel getLogLevel() {
         return logLevel;
     }
 
-    public void setLogLevel(LogLevel logLevel) {
+    public void setLogLevel(@NotNull LogLevel logLevel) {
         this.logLevel = logLevel;
-    }
-
-    @Nullable
-    public Throwable getThrowable() {
-        return throwable;
-    }
-
-    public void setThrowable(@Nullable Throwable throwable) {
-        this.throwable = throwable;
     }
 }

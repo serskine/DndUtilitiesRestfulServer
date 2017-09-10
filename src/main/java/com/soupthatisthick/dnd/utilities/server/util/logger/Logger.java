@@ -3,6 +3,7 @@ package com.soupthatisthick.dnd.utilities.server.util.logger;
 
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import com.soupthatisthick.dnd.utilities.server.util.text.Text;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import java.io.Serializable;
 
 public class Logger {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Logger.class.getSimpleName());
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger("Main logger");
 
     public static class CodeSpot
     {
@@ -66,7 +67,7 @@ public class Logger {
     {
         CodeSpot src = getCodeSpot(depth+1);
         String TAG = getTag(src);
-        logger.info(TAG + text);
+        LOG.info(TAG + text);
     }
 
     public static final void error(String text, @Nullable Throwable e)
@@ -78,7 +79,7 @@ public class Logger {
     {
         CodeSpot src = getCodeSpot(depth+1);
         String TAG = getTag(src);
-        logger.severe(TAG + text);
+        LOG.error(TAG + text, e);
     }
 
     public static final void info(String text)
@@ -90,7 +91,7 @@ public class Logger {
     {
         CodeSpot src = getCodeSpot(depth+1);
         String TAG = getTag(src);
-        logger.info(TAG + text);
+        LOG.info(TAG + text);
     }
 
     public static final void warning(String text)
@@ -102,7 +103,7 @@ public class Logger {
     {
         CodeSpot src = getCodeSpot(depth+1);
         String TAG = getTag(src);
-        logger.warning(TAG + text);
+        LOG.warn(TAG + text);
     }
 
     /**

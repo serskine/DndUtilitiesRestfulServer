@@ -16,14 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Owner on 9/9/2017.
- */
 public class BaseApiController {
 
     // Constants ----------------------------------------------------------------- Constants //
 
-    public static final String UNSUPPORTED_MEDIA_TYPE_MESSAGE = "Unsupported Media Type, Content-Type must be application.json";
+    private static final String UNSUPPORTED_MEDIA_TYPE_MESSAGE = "Unsupported Media Type, Content-Type must be application.json";
 
     // Instance Variables ----------------------------------------------- Instance Variables //
 
@@ -78,7 +75,7 @@ public class BaseApiController {
     @ExceptionHandler(Throwable.class)
     @ResponseBody
     public ApiResponse catchAll(final Throwable throwable, final HttpServletResponse httpResponse) {
-        Logger.error("Unexpected exception occurred.", throwable);
+        Logger.error("Unexpected error occurred.", throwable);
 
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.getStatus().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

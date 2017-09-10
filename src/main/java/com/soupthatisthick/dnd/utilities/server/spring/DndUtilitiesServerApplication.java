@@ -19,7 +19,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.sql.DataSource;
 import java.util.concurrent.Executor;
@@ -38,7 +37,7 @@ import java.util.concurrent.Executor;
 })
 @EnableAdminServer
 @EnableAsync
-public class DndUtilitiesApplication extends SpringBootServletInitializer {
+public class DndUtilitiesServerApplication extends SpringBootServletInitializer {
 
     @Autowired
     private DataSource primaryDataSource;
@@ -47,12 +46,12 @@ public class DndUtilitiesApplication extends SpringBootServletInitializer {
         Logger.title("args");
         Logger.info(JsonUtil.toJson(args,true));
 
-        SpringApplication.run(DndUtilitiesApplication.class, args);
+        SpringApplication.run(DndUtilitiesServerApplication.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(DndUtilitiesApplication.class);
+        return builder.sources(DndUtilitiesServerApplication.class);
     }
 
     @Bean

@@ -8,6 +8,8 @@ import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Owner on 9/9/2017.
  */
@@ -16,20 +18,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestingService {
 
     @Transactional
-    public void logMessageRequest(LogMessageRequest request) throws TestingServiceException {
+    public void logMessageRequest(@NotNull LogMessageRequest request) throws TestingServiceException {
 
         switch(request.getLogLevel()) {
             case INFO:
-                Logger.info(JsonUtil.toJson(request, true));
+                Logger.info(request.getMessage());
                 break;
             case DEBUG:
-                Logger.debug(JsonUtil.toJson(request, true));
+                Logger.debug(request.getMessage());
                 break;
             case WARNING:
-                Logger.warning(JsonUtil.toJson(request, true));
+                Logger.warning(request.getMessage());
                 break;
             case ERROR:
-                Logger.error(JsonUtil.toJson(request, true), null);
+                Logger.error(request.getMessage(), null);
                 break;
             default:
                 throw new TestingServiceException(ErrorCode.TESTING_LOG_LEVEL_REQUIRED, "Log level is required.");

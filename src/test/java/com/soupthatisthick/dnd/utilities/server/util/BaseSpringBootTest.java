@@ -2,7 +2,7 @@ package com.soupthatisthick.dnd.utilities.server.util;
 
 import com.soupthatisthick.dnd.utilities.server.service.testing.TestingService;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
-import com.soupthatisthick.dnd.utilities.server.spring.DndUtilitiesApplication;
+import com.soupthatisthick.dnd.utilities.server.spring.DndUtilitiesServerApplication;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DndUtilitiesApplication.class)
+@SpringBootTest(classes = DndUtilitiesServerApplication.class)
 public abstract class BaseSpringBootTest {
 
     // Constants ----------------------------------------------------------------- Constants //

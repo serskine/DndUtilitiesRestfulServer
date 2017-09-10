@@ -9,11 +9,11 @@ import com.soupthatisthick.dnd.utilities.server.api.common.BaseRequest;
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 import javax.validation.constraints.NotNull;
 
 import static com.soupthatisthick.dnd.utilities.server.util.AssertUtil.assertHttpResponseStatus;
-import static com.soupthatisthick.dnd.utilities.server.util.AssertUtil.assertResponseStatus;
 
 public class BaseIT {
 
@@ -21,8 +21,8 @@ public class BaseIT {
 
     // Instance Variables ----------------------------------------------- Instance Variables //
 
-    protected static final int PORT = 8000;
-    protected static final String SERVER = String.format("http://localhost:%d/", PORT);
+    private static final int PORT = 8000;
+    private static final String SERVER = String.format("http://localhost:%d/", PORT);
 
     // Constructors ----------------------------------------------------------- Constructors //
 
@@ -30,13 +30,13 @@ public class BaseIT {
 
     // Protected Methods ------------------------------------------------- Protected Methods //
 
-    protected final void logResponse(@NotNull HttpResponse<String> response) {
+    private void logResponse(@NotNull HttpResponse<String> response) {
         Logger.info("Response: " + response.getStatus());
-        Logger.json(response.getStatusText());
-        Logger.json(response.getBody());
+        Logger.info(response.getStatusText());
+        Logger.info(response.getBody());
     }
 
-    protected final void logRequest(@NotNull BaseRequest request) {
+    private void logRequest(@NotNull BaseRequest request) {
         Logger.info("Request: " + request.getClass().getSimpleName());
         Logger.json(request);
     }
@@ -62,7 +62,15 @@ public class BaseIT {
      * @throws UnirestException is we could not reach the server.
      */
     protected final ApiResponse sendRequest(@NotNull BaseRequest request, @NotNull String endPoint) throws UnirestException {
-        HttpResponse<String> response = Unirest.post(SERVER + endPoint).asString();
+
+        logRequest(request);
+
+        String bodyAsJson = JsonUtil.toJson(request, true);
+
+        HttpResponse<String> response = Unirest.post(SERVER + endPoint)
+                .header("content-type", MediaType.APPLICATION_JSON_VALUE)
+                .body(bodyAsJson)
+                .asString();
 
         logResponse(response);
 
@@ -70,7 +78,6 @@ public class BaseIT {
         Logger.info(prettyBody);
 
         assertHttpResponseStatus(response, HttpStatus.OK);
-        ApiResponse apiResponse = JsonUtil.toObject(response.getBody(), ApiResponse.class);
 
         return JsonUtil.toObject(response.getBody(), ApiResponse.class);
     }
