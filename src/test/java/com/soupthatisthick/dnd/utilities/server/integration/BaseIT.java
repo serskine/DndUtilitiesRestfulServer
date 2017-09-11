@@ -30,15 +30,19 @@ public class BaseIT {
 
     // Protected Methods ------------------------------------------------- Protected Methods //
 
-    private void logResponse(@NotNull HttpResponse<String> response) {
-        Logger.info("Response: " + response.getStatus());
-        Logger.info(response.getStatusText());
+    private void logHttpResponse(@NotNull HttpResponse<String> response) {
+        Logger.info("----- Http Response ------", 1);
+        Logger.info("Status:      " + response.getStatus(), 1);
+        Logger.info("Status Text: " + response.getStatusText(), 1);
         Logger.info(response.getBody());
+        Logger.info("--------------------------", 1);
     }
 
     private void logRequest(@NotNull BaseRequest request) {
-        Logger.info("Request: " + request.getClass().getSimpleName());
-        Logger.json(request);
+        Logger.info("------ Api Request -------", 1);
+        Logger.info("Request Class: " + request.getClass().getSimpleName());
+        Logger.info("\n" + JsonUtil.toJson(request, true));
+        Logger.info("--------------------------", 1);
     }
 
     protected final void logApiResponse(@NotNull ApiResponse apiResponse) {
@@ -65,21 +69,22 @@ public class BaseIT {
 
         logRequest(request);
 
-        String bodyAsJson = JsonUtil.toJson(request, true);
+        String requestBodyAsJson = JsonUtil.toJson(request, true);
 
         HttpResponse<String> response = Unirest.post(SERVER + endPoint)
                 .header("content-type", MediaType.APPLICATION_JSON_VALUE)
-                .body(bodyAsJson)
+                .body(requestBodyAsJson)
                 .asString();
 
-        logResponse(response);
-
-        String prettyBody = JsonUtil.prettyPrintUglyJsonString(response.getBody());
-        Logger.info(prettyBody);
+        logHttpResponse(response);
 
         assertHttpResponseStatus(response, HttpStatus.OK);
 
-        return JsonUtil.toObject(response.getBody(), ApiResponse.class);
+        ApiResponse apiResponse = JsonUtil.toObject(response.getBody(), ApiResponse.class);
+
+        logApiResponse(apiResponse);
+
+        return apiResponse;
     }
 
     // Private methods ----------------------------------------------------- Private methods //

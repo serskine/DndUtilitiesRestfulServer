@@ -43,9 +43,6 @@ public class DndUtilitiesServerApplication extends SpringBootServletInitializer 
     private DataSource primaryDataSource;
 
     public static void main(String[] args) {
-        Logger.title("args");
-        Logger.info(JsonUtil.toJson(args,true));
-
         SpringApplication.run(DndUtilitiesServerApplication.class, args);
     }
 

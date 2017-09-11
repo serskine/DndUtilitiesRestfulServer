@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
 public class LogMessageRequest extends BaseRequest {
 
     @NotNull
-    private String message;
+    private String message = "DEFAULT MESSAGE";
 
     @NotNull
-    private LogLevel logLevel;
+    private LogLevel logLevel = LogLevel.DEBUG;
 
     // ------------------------------- GETTERS AND SETTERS ------------------------------- //
 

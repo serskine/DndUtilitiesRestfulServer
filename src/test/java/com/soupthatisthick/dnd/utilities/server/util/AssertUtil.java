@@ -3,8 +3,12 @@ package com.soupthatisthick.dnd.utilities.server.util;
 import com.mashape.unirest.http.HttpResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiStatus;
+import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
+import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
+import com.soupthatisthick.dnd.utilities.server.util.podam.PodamUtil;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -71,6 +75,26 @@ public class AssertUtil {
         assertEquals("All items should have been removed. ", 0, observedCopy.size());
     }
 
+    public static <T extends Serializable> void assertClassIsJsonConvertable(Class<T> classType) {
+
+        T expected = PodamUtil.manufacture(classType);
+        String expectedJson = JsonUtil.toJson(expected, true);
+
+        T observed = JsonUtil.toObject(expectedJson, classType);
+        String observedJson = JsonUtil.toJson(observed);
+
+        assertEquals("should match", expectedJson, observedJson);
+    }
+
+    public static void assertObjectIsJsonConvertable(Object expected) {
+        String expectedJson = JsonUtil.toJson(expected, true);
+        Logger.info("--- Expected Json ---\n" + expectedJson);
+        Object observed = JsonUtil.toObject(expectedJson, expected.getClass());
+        String observedJson = JsonUtil.toJson(observed, true);
+        Logger.info("--- Observed Json ---\n" + observedJson);
+
+        assertEquals("should match", expectedJson, observedJson);
+    }
 
     // Protected Methods ------------------------------------------------- Protected Methods //
 
