@@ -35,7 +35,7 @@ public class AssertUtil {
         String assertMessage = "Expected " + expected.name() + " but was " + status.getStatusCode().name() + ".";
         assertMessage += "\n" + status.getMessage();
 
-        assertEquals(assertMessage, expected.value(), status.getStatusCode());
+        assertEquals(assertMessage, expected, status.getStatusCode());
     }
 
     public static final void assertResponseStatusIsNot(ApiResponse response, HttpStatus notExpected) {
@@ -49,11 +49,12 @@ public class AssertUtil {
         assertNotEquals(assertMessage, notExpected, status.getStatusCode());
     }
 
-    public static final void assertHttpResponseStatus(HttpResponse httpResponse, HttpStatus expected) {
+    public static final void assertHttpResponseStatus(HttpResponse httpResponse, HttpStatus expectedStatus) {
         assertNotNull(httpResponse);
 
-        String assertMessage = "Expecting " + expected.name() + " but was " + HttpStatus.valueOf(httpResponse.getStatus()).name();
-        assertEquals(assertMessage, expected.value(), httpResponse.getStatus());
+        HttpStatus observedStatus = HttpStatus.valueOf(httpResponse.getStatus());
+        String assertMessage = "Expecting " + expectedStatus.name() + " but was " + observedStatus.name();
+        assertEquals(assertMessage, expectedStatus, observedStatus);
     }
 
     public static final <T> void assertCollectionsSame(Collection<T> expected, Collection<T> observed) {
