@@ -1,7 +1,7 @@
 package com.soupthatisthick.dnd.utilities.server.api.common;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.soupthatisthick.dnd.utilities.server.service.common.BaseModel;
+import com.soupthatisthick.dnd.utilities.server.service.common.base.BaseModel;
 import org.springframework.http.HttpStatus;
 
 import javax.annotation.Nullable;

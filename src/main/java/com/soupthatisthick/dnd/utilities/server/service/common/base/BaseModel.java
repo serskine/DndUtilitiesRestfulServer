@@ -1,4 +1,4 @@
-package com.soupthatisthick.dnd.utilities.server.service.common;
+package com.soupthatisthick.dnd.utilities.server.service.common.base;
 
 import java.io.Serializable;
 

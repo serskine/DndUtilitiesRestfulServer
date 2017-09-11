@@ -1,6 +1,5 @@
 package com.soupthatisthick.dnd.utilities.server.api.common;
 
-import com.soupthatisthick.dnd.utilities.server.service.common.BaseModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

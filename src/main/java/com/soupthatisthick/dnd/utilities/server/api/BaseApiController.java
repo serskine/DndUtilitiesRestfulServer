@@ -3,7 +3,7 @@ package com.soupthatisthick.dnd.utilities.server.api;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiStatus;
 import com.soupthatisthick.dnd.utilities.server.api.common.FieldError;
-import com.soupthatisthick.dnd.utilities.server.service.common.ServiceException;
+import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
 import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

@@ -1,6 +1,6 @@
 package com.soupthatisthick.dnd.utilities.server.api.common;
 
-import com.soupthatisthick.dnd.utilities.server.service.common.BaseModel;
+import com.soupthatisthick.dnd.utilities.server.service.common.base.BaseModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.domain.Page;
 

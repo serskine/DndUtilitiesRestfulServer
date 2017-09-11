@@ -1,7 +1,7 @@
 package com.soupthatisthick.dnd.utilities.server.service.testing.model.exception;
 
-import com.soupthatisthick.dnd.utilities.server.service.common.ErrorCode;
-import com.soupthatisthick.dnd.utilities.server.service.common.ServiceException;
+import com.soupthatisthick.dnd.utilities.server.service.common.base.ErrorCode;
+import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
 
 /**
  * Created by Owner on 9/9/2017.

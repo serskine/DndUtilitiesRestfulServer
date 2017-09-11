@@ -1,4 +1,4 @@
-package com.soupthatisthick.dnd.utilities.server.data.jpa.entity;
+package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

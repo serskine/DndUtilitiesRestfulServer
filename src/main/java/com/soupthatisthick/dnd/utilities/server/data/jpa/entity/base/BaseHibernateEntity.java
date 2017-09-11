@@ -1,4 +1,4 @@
-package com.soupthatisthick.dnd.utilities.server.data.jpa.entity;
+package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base;
 
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import org.apache.commons.lang.builder.HashCodeBuilder;

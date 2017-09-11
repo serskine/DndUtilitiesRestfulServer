@@ -1,4 +1,4 @@
-package com.soupthatisthick.dnd.utilities.server.service.common;
+package com.soupthatisthick.dnd.utilities.server.service.common.base;
 
 /**
  * Created by Owner on 9/9/2017.
