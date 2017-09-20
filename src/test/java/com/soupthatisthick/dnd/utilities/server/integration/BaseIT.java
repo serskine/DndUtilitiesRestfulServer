@@ -7,13 +7,13 @@ import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiStatus;
 import com.soupthatisthick.dnd.utilities.server.api.common.BaseRequest;
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
-import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import javax.validation.constraints.NotNull;
 
 import static com.soupthatisthick.dnd.utilities.server.util.AssertUtil.assertHttpResponseStatus;
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 
 public class BaseIT {
 
@@ -31,31 +31,31 @@ public class BaseIT {
     // Protected Methods ------------------------------------------------- Protected Methods //
 
     private void logHttpResponse(@NotNull HttpResponse<String> response) {
-        Logger.info("----- Http Response ------", 1);
-        Logger.info("Status:      " + response.getStatus(), 1);
-        Logger.info("Status Text: " + response.getStatusText(), 1);
-        Logger.info(response.getBody());
-        Logger.info("--------------------------", 1);
+        LOG.info("----- Http Response ------");
+        LOG.info("Status:      " + response.getStatus());
+        LOG.info("Status Text: " + response.getStatusText());
+        LOG.info(response.getBody());
+        LOG.info("--------------------------");
     }
 
     private void logRequest(@NotNull BaseRequest request) {
-        Logger.info("------ Api Request -------", 1);
-        Logger.info("Request Class: " + request.getClass().getSimpleName());
-        Logger.info("\n" + JsonUtil.toJson(request, true));
-        Logger.info("--------------------------", 1);
+        LOG.info("------ Api Request -------");
+        LOG.info("Request Class: " + request.getClass().getSimpleName());
+        LOG.info("\n" + JsonUtil.toJson(request, true));
+        LOG.info("--------------------------");
     }
 
     protected final void logApiResponse(@NotNull ApiResponse apiResponse) {
         ApiStatus status = apiResponse.getStatus();
         HttpStatus httpStatus = status.getStatusCode();
         String jsonText = JsonUtil.toJson(status, true);
-        Logger.info("------ Api Response ------", 1);
-        Logger.info("Http Status:       " + httpStatus.name() + " (" + httpStatus.value() + ")", 1);
-        Logger.info("Status Code:       " + status.getStatusCode(), 1);
-        Logger.info("Status error code: " + status.getErrorCode(), 1);
-        Logger.info("Status message:    " + status.getMessage(), 1);
-        Logger.info("Data: " + ((jsonText != null && jsonText.contains("\n")) ? "\n" : "") + jsonText, 1);
-        Logger.info("--------------------------", 1);
+        LOG.info("------ Api Response ------");
+        LOG.info("Http Status:       " + httpStatus.name() + " (" + httpStatus.value() + ")");
+        LOG.info("Status Code:       " + status.getStatusCode());
+        LOG.info("Status error code: " + status.getErrorCode());
+        LOG.info("Status message:    " + status.getMessage());
+        LOG.info("Data: " + ((jsonText != null && jsonText.contains("\n")) ? "\n" : "") + jsonText);
+        LOG.info("--------------------------");
     }
 
     /**

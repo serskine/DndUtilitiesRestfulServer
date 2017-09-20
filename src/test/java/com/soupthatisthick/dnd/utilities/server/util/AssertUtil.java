@@ -4,7 +4,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiStatus;
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
-import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import com.soupthatisthick.dnd.utilities.server.util.podam.PodamUtil;
 import org.springframework.http.HttpStatus;
 
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
@@ -89,10 +89,10 @@ public class AssertUtil {
 
     public static void assertObjectIsJsonConvertable(Object expected) {
         String expectedJson = JsonUtil.toJson(expected, true);
-        Logger.info("--- Expected Json ---\n" + expectedJson);
+        LOG.info("--- Expected Json ---\n" + expectedJson);
         Object observed = JsonUtil.toObject(expectedJson, expected.getClass());
         String observedJson = JsonUtil.toJson(observed, true);
-        Logger.info("--- Observed Json ---\n" + observedJson);
+        LOG.info("--- Observed Json ---\n" + observedJson);
 
         assertEquals("should match", expectedJson, observedJson);
     }

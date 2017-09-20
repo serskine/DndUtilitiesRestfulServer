@@ -11,6 +11,7 @@ public class Logger {
 
     private static final org.slf4j.Logger ILOG = LoggerFactory.getLogger("Main logger");
     public static final Logger LOG = new Logger();
+    public static final int CALL_DEPTH = 1;
 
     public class CodeSpot
     {
@@ -54,7 +55,7 @@ public class Logger {
 
     public final void debug(String text, Object... args)
     {
-        debugInternal(text, 1, args);
+        debugInternal(text, CALL_DEPTH, args);
     }
 
 
@@ -67,7 +68,7 @@ public class Logger {
 
     public final void error(String text, @Nullable Throwable e, Object... args)
     {
-        errorInternal(text, 1, e, args);
+        errorInternal(text, CALL_DEPTH, e, args);
     }
 
     private void errorInternal(String text, int depth, @Nullable Throwable e, Object... args)
@@ -79,7 +80,7 @@ public class Logger {
 
     public final void info(String text, Object... args)
     {
-        infoInternal(text, 1, args);
+        infoInternal(text, CALL_DEPTH, args);
     }
 
     private void infoInternal(String text, int depth, Object... args)
@@ -91,7 +92,7 @@ public class Logger {
 
     public final void warning(String text, Object... args)
     {
-        warningInternal(text, 1, args);
+        warningInternal(text, CALL_DEPTH, args);
     }
 
     private void warningInternal(String text, int depth, Object... args)
@@ -108,12 +109,12 @@ public class Logger {
      */
     public final CodeSpot getPreviousCodeSpot()
     {
-        return getCodeSpot(2);
+        return getCodeSpot(CALL_DEPTH+1);
     }
 
     public final void logCodeTransition()
     {
-        LOG.debug(getCodeSpot(2) + " => " + getCodeSpot(1));
+        LOG.debug(getCodeSpot(CALL_DEPTH+1) + " => " + getCodeSpot(CALL_DEPTH));
     }
 
     private String stackTraceString(int depth)
@@ -160,13 +161,13 @@ public class Logger {
      */
     public final void logStackTrace()
     {
-        logStackTrace(1);
+        logStackTrace(CALL_DEPTH);
     }
 
 
     public final void title(String text)
     {
-        title(text, 1);
+        title(text, CALL_DEPTH);
     }
 
     private void title(String text, int depth)
