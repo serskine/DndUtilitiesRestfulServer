@@ -1,11 +1,11 @@
 package com.soupthatisthick.dnd.utilities.server.util.podam;
 
-import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.URL;
 
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 import static com.soupthatisthick.dnd.utilities.server.util.text.Text.isBlank;
 import static org.apache.commons.lang.CharEncoding.UTF_8;
 
@@ -23,6 +23,7 @@ public class ResourceUtil {
     private ResourceUtil() {
 
     }
+
 
     // Public Methods ------------------------------------------------------- Public Methods //
 
@@ -43,7 +44,7 @@ public class ResourceUtil {
     }
 
     public static File copyResourceToTempFile(String resourcePath) {
-        Logger.debug("Copying resource [" + resourcePath + "] into temporary file.");
+        LOG.debug("Copying resource [" + resourcePath + "] into temporary file.");
 
         if (isBlank(resourcePath)) {
             throw new IllegalArgumentException(ERROR_MSG_RESOURCE_PATH_BLANK);
@@ -53,17 +54,17 @@ public class ResourceUtil {
         try {
             file = File.createTempFile(TEMP_FILENAME_PREFIX, null);
         } catch (IOException e) {
-            Logger.error("Unable to create temp file on filesystem, check that you have write access.", e);
+            LOG.error("Unable to create temp file on filesystem, check that you have write access.", e);
             throw new RuntimeException("Unable to create temp file on filesystem, check that you have write access.");
         }
 
-        Logger.debug(String.format("Reading resource [%s] and writing to temporary file: %s.", resourcePath, file.getAbsolutePath()));
+        LOG.debug(String.format("Reading resource [%s] and writing to temporary file: %s.", resourcePath, file.getAbsolutePath()));
 
         FileOutputStream fileOutputStream;
         try {
             fileOutputStream = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
-            Logger.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             throw new RuntimeException(e.getMessage(), e);
         }
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
@@ -78,7 +79,7 @@ public class ResourceUtil {
     }
 
     public static String readResourceIntoString(String resourcePath) throws UnsupportedEncodingException {
-        Logger.debug("Copying resource [" + resourcePath + "] into memory (String).");
+        LOG.debug("Copying resource [" + resourcePath + "] into memory (String).");
 
         if (isBlank(resourcePath)) {
             throw new IllegalArgumentException(ERROR_MSG_RESOURCE_PATH_BLANK);
@@ -112,7 +113,7 @@ public class ResourceUtil {
         try {
             pipe(bufferedReader, bufferedWriter);
         } catch (IOException e) {
-            Logger.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             throw new RuntimeException("Exception occurred while piping input into output.", e);
         } finally {
             IOUtils.closeQuietly(bufferedReader);
@@ -125,7 +126,7 @@ public class ResourceUtil {
         try {
             pipe(bufferedInputStream, bufferedOutputStream);
         } catch (IOException e) {
-            Logger.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             throw new RuntimeException("Exception occurred while piping input into output.", e);
         } finally {
             IOUtils.closeQuietly(bufferedInputStream);
@@ -141,7 +142,7 @@ public class ResourceUtil {
 
         if (resourceInputStream == null) {
             String errorMessage = "Unable to read resource into input stream, please check that resource exists.";
-            Logger.warning(String.format("%s: %s", errorMessage, resourcePath));
+            LOG.warning(String.format("%s: %s", errorMessage, resourcePath));
             throw new IllegalArgumentException(errorMessage);
         }
 

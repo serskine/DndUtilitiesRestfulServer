@@ -1,7 +1,5 @@
 package com.soupthatisthick.dnd.utilities.server.spring;
 
-import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
-import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +11,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 
 /**
  * Created by Owner on 9/9/2017.
@@ -33,9 +33,9 @@ public class DataJpaConfigInMemoryDataSource {
                 .build();
 
         if (db==null) {
-            Logger.warning("Failed to initialize the in-memory data source!");
+            LOG.warning("Failed to initialize the in-memory data source!");
         } else {
-            Logger.info("Initialized in-memory DB.");
+            LOG.info("Initialized in-memory DB.");
             return db;
         }
 

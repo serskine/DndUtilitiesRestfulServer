@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
+
 /**
  * Created by Owner on 9/9/2017.
  */
@@ -15,7 +17,7 @@ public class DndUtilServerAuthenticationProvider implements AuthenticationProvid
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Logger.warning("DndUtilServerAuthenticationProvider: entry");
+        LOG.warning("DndUtilServerAuthenticationProvider: entry");
 
         DndUtilServerAuthenticationToken authenticationToken = (DndUtilServerAuthenticationToken) authentication;
 

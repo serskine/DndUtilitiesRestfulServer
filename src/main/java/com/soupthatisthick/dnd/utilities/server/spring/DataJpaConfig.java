@@ -1,7 +1,6 @@
 package com.soupthatisthick.dnd.utilities.server.spring;
 
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
-import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -15,6 +14,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 
 /**
  * Created by Owner on 9/9/2017.
@@ -37,10 +38,10 @@ public class DataJpaConfig {
                 .driverClassName(env.getProperty("spring.datasource.driver-class-name"))
                 .build();
 
-        Logger.debug("\n***\n*** Primary Data Source\n***\n" + JsonUtil.toJson(dataSource, true));
+        LOG.debug("\n***\n*** Primary Data Source\n***\n" + JsonUtil.toJson(dataSource, true));
 
         if (dataSource==null) {
-            Logger.warning("Failed to initialize the datasource!");
+            LOG.warning("Failed to initialize the datasource!");
         }
 
         return dataSource;

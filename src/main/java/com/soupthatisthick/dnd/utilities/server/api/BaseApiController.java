@@ -4,7 +4,6 @@ import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiStatus;
 import com.soupthatisthick.dnd.utilities.server.api.common.FieldError;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
-import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 
 public class BaseApiController {
 
@@ -34,7 +35,7 @@ public class BaseApiController {
             final ServiceException exception,
             final HttpServletResponse httpResponse
     ) {
-        Logger.error(exception.getMessage(), exception);
+        LOG.error(exception.getMessage(), exception);
         ApiResponse apiResponse = new ApiResponse();
         ApiStatus status = new ApiStatus();
         status.setErrorCode(exception.getClass().getSimpleName());
@@ -75,7 +76,7 @@ public class BaseApiController {
     @ExceptionHandler(Throwable.class)
     @ResponseBody
     public ApiResponse catchAll(final Throwable throwable, final HttpServletResponse httpResponse) {
-        Logger.error("Unexpected error occurred.", throwable);
+        LOG.error("Unexpected error occurred.", throwable);
 
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.getStatus().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

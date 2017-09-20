@@ -23,6 +23,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import javax.sql.DataSource;
 import java.util.concurrent.Executor;
 
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
+
 /**
  * Created by Owner on 9/9/2017.
  */
@@ -76,7 +78,7 @@ public class DndUtilitiesServerApplication extends SpringBootServletInitializer 
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setChangeLog("classpath:/db.changelog/liquibase-changeLog.xml");
         liquibase.setDataSource(dataSource());
-        Logger.info("Created liquibase for database versioning management.");
+        LOG.info("Created liquibase for database versioning management.");
         return liquibase;
     }
 
