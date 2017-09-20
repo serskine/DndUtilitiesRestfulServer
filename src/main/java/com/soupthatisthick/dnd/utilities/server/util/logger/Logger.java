@@ -1,23 +1,18 @@
 package com.soupthatisthick.dnd.utilities.server.util.logger;
 
 
-import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import com.soupthatisthick.dnd.utilities.server.util.text.Text;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import java.io.Serializable;
 
-/**
- * Created by Owner on 1/29/2017.
- * Copyright of Stuart Marr Erskine, all rights reserved.
- */
-
+@SuppressWarnings({"SameParameterValue", "WeakerAccess", "unused"})
 public class Logger {
 
-    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger("Main logger");
+    private static final org.slf4j.Logger ILOG = LoggerFactory.getLogger("Main logger");
+    public static final Logger LOG = new Logger();
 
-    public static class CodeSpot
+    public class CodeSpot
     {
         public final StackTraceElement stackTraceElement;
         public final int height;
@@ -36,12 +31,12 @@ public class Logger {
 
     }
 
-    private static final String tabString(int height)
+    private String tabString(int height)
     {
         return Text.padString(".", height);
     }
 
-    public static final CodeSpot getCodeSpot(int depth)
+    private CodeSpot getCodeSpot(int depth)
     {
         try {
             throw new Exception();
@@ -52,58 +47,58 @@ public class Logger {
         }
     }
 
-    private static final String getTag(CodeSpot element)
+    private String getTag(CodeSpot element)
     {
         return element.toString();
     }
 
-    public static final void debug(String text)
+    public final void debug(String text, Object... args)
     {
-        debug(text, 1);
+        debugInternal(text, 1, args);
     }
 
 
-    public static final void debug(String text, int depth)
+    private void debugInternal(String text, int depth, Object... args)
     {
         CodeSpot src = getCodeSpot(depth+1);
         String TAG = getTag(src);
-        LOG.info(TAG + text);
+        ILOG.info(TAG + text, args);
     }
 
-    public static final void error(String text, @Nullable Throwable e)
+    public final void error(String text, @Nullable Throwable e, Object... args)
     {
-        error(text, 1, e);
+        errorInternal(text, 1, e, args);
     }
 
-    public static final void error(String text, int depth, @Nullable Throwable e)
-    {
-        CodeSpot src = getCodeSpot(depth+1);
-        String TAG = getTag(src);
-        LOG.error(TAG + text, e);
-    }
-
-    public static final void info(String text)
-    {
-        info(text, 1);
-    }
-
-    public static final void info(String text, int depth)
+    private void errorInternal(String text, int depth, @Nullable Throwable e, Object... args)
     {
         CodeSpot src = getCodeSpot(depth+1);
         String TAG = getTag(src);
-        LOG.info(TAG + text);
+        ILOG.error(TAG + text, e);
     }
 
-    public static final void warning(String text)
+    public final void info(String text, Object... args)
     {
-        warning(text, 1);
+        infoInternal(text, 1, args);
     }
 
-    public static final void warning(String text, int depth)
+    private void infoInternal(String text, int depth, Object... args)
     {
         CodeSpot src = getCodeSpot(depth+1);
         String TAG = getTag(src);
-        LOG.warn(TAG + text);
+        ILOG.info(TAG + text, args);
+    }
+
+    public final void warning(String text, Object... args)
+    {
+        warningInternal(text, 1, args);
+    }
+
+    private void warningInternal(String text, int depth, Object... args)
+    {
+        CodeSpot src = getCodeSpot(depth+1);
+        String TAG = getTag(src);
+        ILOG.warn(TAG + text, args);
     }
 
     /**
@@ -111,19 +106,19 @@ public class Logger {
      * IE. The previous scope to the scope containing the call of this method will be displayed in the logs.
      * This is useful for determining where a particular method was called from.
      */
-    public static final CodeSpot getPreviousCodeSpot()
+    public final CodeSpot getPreviousCodeSpot()
     {
         return getCodeSpot(2);
     }
 
-    public static final void logCodeTransition()
+    public final void logCodeTransition()
     {
-        Logger.debug(getCodeSpot(2) + " => " + getCodeSpot(1));
+        LOG.debug(getCodeSpot(2) + " => " + getCodeSpot(1));
     }
 
-    private static final String stackTraceString(int depth)
+    private String stackTraceString(int depth)
     {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         try {
             throw new RuntimeException("");
         } catch (Exception e) {
@@ -143,51 +138,45 @@ public class Logger {
             for(int i=depth+1; i<elements.length; i++)
             {
                 CodeSpot codeSpot = new CodeSpot(elements[i], i);
-                output +=
-                        Text.fString(codeSpot.toString(), sourceWidth) + ": " +
-                        Text.fString(codeSpot.stackTraceElement.getMethodName() + "()", methodWidth) + "\n";
+                output.append(Text.fString(codeSpot.toString(), sourceWidth)).append(": ").append(Text.fString(codeSpot.stackTraceElement.getMethodName() + "()", methodWidth)).append("\n");
             }
         }
-        return output;
+        return output.toString();
     }
 
     /**
      * This will log the stack trace up to the stack level value below
      * the calling of this method. By calling this method with a depth of 0 you will
      * include everything up to but excluding the call to this method.
-     * @param depth
+     * @param depth determines how far down the stack trace our source method is
      */
-    public static final void logStackTrace(int depth)
+    private void logStackTrace(int depth)
     {
-        Logger.info(stackTraceString(depth+1), depth+1);
+        LOG.infoInternal(stackTraceString(depth+1), depth+1);
     }
 
     /**
      * This will log the stack trace up to the point of calling this method but not including this method.
      */
-    public static final void logStackTrace()
+    public final void logStackTrace()
     {
         logStackTrace(1);
     }
 
 
-    public static final void title(String text)
+    public final void title(String text)
     {
         title(text, 1);
     }
-    public static final void title(String text, int depth)
+
+    private void title(String text, int depth)
     {
         title(text, 80, depth+1);
     }
-    public static final void title(String text, int rowLength, int depth)
+
+    private void title(String text, int rowLength, int depth)
     {
-        Logger.info(Text.titleString(text,'*', '=', '|', ' ', rowLength), depth+1);
+        LOG.infoInternal(Text.titleString(text,'*', '=', '|', ' ', rowLength), depth+1);
     }
 
-    /**
-     * This will take any objects and print it's contents out in a pretty json format
-     */
-    public static final void json(Serializable object) {
-        info(JsonUtil.toJson(object, true), 1);
-    }
 }

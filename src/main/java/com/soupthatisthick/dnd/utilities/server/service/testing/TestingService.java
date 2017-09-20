@@ -1,6 +1,7 @@
 package com.soupthatisthick.dnd.utilities.server.service.testing;
 
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ErrorCode;
+import com.soupthatisthick.dnd.utilities.server.service.testing.model.EchoRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogMessageRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
 import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
@@ -66,5 +67,10 @@ public class TestingService {
         Logger.info("Resetting the database.");
         cleanDatabase();
         initDatabase();
+    }
+
+    @Transactional
+    public String echoResponse(@NotNull EchoRequest echoRequest) {
+        return echoRequest.getMessage();
     }
 }

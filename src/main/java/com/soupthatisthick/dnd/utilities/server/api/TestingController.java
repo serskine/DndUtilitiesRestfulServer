@@ -2,6 +2,7 @@ package com.soupthatisthick.dnd.utilities.server.api;
 
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.service.testing.TestingService;
+import com.soupthatisthick.dnd.utilities.server.service.testing.model.EchoRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogMessageRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.ResetRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
+
 
 @Api(description = "Testing Management Endpoint")
 @RestController
@@ -32,12 +36,18 @@ public class TestingController extends BaseApiController {
         return new ApiResponse();
     }
 
-    @SuppressWarnings("unused")
     @ApiOperation(value = "Reset the data source by deleting all records and then initializing the records again.")
     @RequestMapping(value="/reset", method = RequestMethod.POST)
     public ApiResponse reset(@Valid @RequestBody ResetRequest request) throws TestingServiceException {
         testingService.resetDatabase();
         return new ApiResponse();
+    }
+
+    @ApiOperation(value = "Echo the response back to the user")
+    @RequestMapping(value="/echo", method = RequestMethod.POST)
+    public ApiResponse echo(@Valid @RequestBody EchoRequest request) throws TestingServiceException {
+        LOG.info("echo\n{}", request.getMessage());
+        return new ApiResponse(testingService.echoResponse(request));
     }
 
 
