@@ -10,7 +10,7 @@ public class PodamUtil {
 
     // Constants ----------------------------------------------------------------- Constants //
 
-    private static PodamFactory podamFactory = new PodamFactoryImpl();
+    private static final PodamFactory podamFactory = new PodamFactoryImpl();
 
     // Instance Variables ----------------------------------------------- Instance Variables //
 

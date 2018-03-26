@@ -26,7 +26,7 @@ public abstract class BaseSpringBootTest {
 
     @Before
     public void cleanUpDatabase() throws TestingServiceException {
-        testingService.cleanDatabase();
+        testingService.wipeDatabase();
     }
 
     // Protected Methods ------------------------------------------------- Protected Methods //

@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 
 
+@SuppressWarnings({"unchecked", "SpringJavaAutowiredFieldsWarningInspection"})
 @Api(description = "Testing Management Endpoint")
 @RestController
 @RequestMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
-public class TestingController extends BaseApiController {
+class TestingController extends BaseApiController {
 
     @Autowired
     private TestingService testingService;
@@ -45,10 +45,24 @@ public class TestingController extends BaseApiController {
 
     @ApiOperation(value = "Echo the response back to the user")
     @RequestMapping(value="/echo", method = RequestMethod.POST)
-    public ApiResponse echo(@Valid @RequestBody EchoRequest request) throws TestingServiceException {
+    public ApiResponse echo(@Valid @RequestBody EchoRequest request) {
         LOG.info("echo\n{}", request.getMessage());
         return new ApiResponse(testingService.echoResponse(request));
     }
 
+    @ApiOperation(value = "Wipes all the database tables. Called before every test.")
+    @RequestMapping(value="/wipe", method = RequestMethod.GET)
+    public ApiResponse deleteAll() throws TestingServiceException {
+        testingService.wipeDatabase();
+        return new ApiResponse();
+    }
+
+    @ApiOperation(value = "Init the database. Assumes the database has been wiped already.")
+    @RequestMapping(value="/init", method = RequestMethod.GET)
+    public ApiResponse init() throws TestingServiceException {
+        LOG.info("init");
+        testingService.initDatabase();
+        return new ApiResponse();
+    }
 
 }

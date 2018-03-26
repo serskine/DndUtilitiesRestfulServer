@@ -21,7 +21,7 @@ public class BaseIT {
 
     // Instance Variables ----------------------------------------------- Instance Variables //
 
-    private static final int PORT = 8000;
+    private static final int PORT = 5000;
     private static final String SERVER = String.format("http://localhost:%d/", PORT);
 
     // Constructors ----------------------------------------------------------- Constructors //
@@ -31,31 +31,46 @@ public class BaseIT {
     // Protected Methods ------------------------------------------------- Protected Methods //
 
     private void logHttpResponse(@NotNull HttpResponse<String> response) {
-        LOG.info("----- Http Response ------");
-        LOG.info("Status:      " + response.getStatus());
-        LOG.info("Status Text: " + response.getStatusText());
-        LOG.info(response.getBody());
-        LOG.info("--------------------------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n----- Http Response ------\nStatus:      ");
+        sb.append(response.getStatus());
+        sb.append("\nStatus Text: ");
+        sb.append(response.getStatusText());
+        sb.append("\n");
+        sb.append(response.getBody());
+        sb.append("\n--------------------------\n");
+        LOG.info("{}", sb.toString());
     }
 
     private void logRequest(@NotNull BaseRequest request) {
-        LOG.info("------ Api Request -------");
-        LOG.info("Request Class: " + request.getClass().getSimpleName());
-        LOG.info("\n" + JsonUtil.toJson(request, true));
-        LOG.info("--------------------------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n------ Api Request -------\nRequest Class: ");
+        sb.append(request.getClass().getSimpleName());
+        sb.append("\n");
+        sb.append(JsonUtil.toJson(request, true));
+        sb.append("\n--------------------------\n");
+        LOG.info("{}", sb.toString());
     }
 
     protected final void logApiResponse(@NotNull ApiResponse apiResponse) {
         ApiStatus status = apiResponse.getStatus();
         HttpStatus httpStatus = status.getStatusCode();
         String jsonText = JsonUtil.toJson(status, true);
-        LOG.info("------ Api Response ------");
-        LOG.info("Http Status:       " + httpStatus.name() + " (" + httpStatus.value() + ")");
-        LOG.info("Status Code:       " + status.getStatusCode());
-        LOG.info("Status error code: " + status.getErrorCode());
-        LOG.info("Status message:    " + status.getMessage());
-        LOG.info("Data: " + ((jsonText != null && jsonText.contains("\n")) ? "\n" : "") + jsonText);
-        LOG.info("--------------------------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n------ Api Response ------\nHttp Status:       ");
+        sb.append(httpStatus.name());
+        sb.append(" (");
+        sb.append(httpStatus.value());
+        sb.append(")\nStatus Code:       ");
+        sb.append(status.getStatusCode());
+        sb.append("\nStatus error code: ");
+        sb.append(status.getErrorCode());
+        sb.append("\nStatus message:    ");
+        sb.append(status.getMessage());
+        sb.append("\nData: ");
+        sb.append(((jsonText != null && jsonText.contains("\n")) ? "\n" : "") + jsonText);
+        sb.append("\n--------------------------\n");
+        LOG.info("{}", sb.toString());
     }
 
     /**

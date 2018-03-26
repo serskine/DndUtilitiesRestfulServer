@@ -1,0 +1,71 @@
+package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.lookup;
+
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base.DisplayableEntity;
+import com.soupthatisthick.dnd.utilities.server.service.common.model.Currency;
+import com.soupthatisthick.dnd.utilities.server.service.common.model.Length;
+import com.soupthatisthick.dnd.utilities.server.service.common.model.Measure;
+
+import javax.persistence.Column;
+
+public class VechicleEntity extends DisplayableEntity {
+
+    // Constants ----------------------------------------------------------------- Constants //
+
+    // Instance Variables ----------------------------------------------- Instance Variables //
+
+    @Column(name="cost", nullable=false)
+    private Measure<Currency> cost;
+
+    @Column(name="cost", nullable=false)
+    private String goods;
+
+    @Column(name="cost", nullable=false)
+    private String description;
+
+    @Column(name="speed", nullable=false)
+    private Measure<Length> speed;
+
+
+    // Constructors ----------------------------------------------------------- Constructors //
+
+    // Public Methods ------------------------------------------------------- Public Methods //
+
+    // Protected Methods ------------------------------------------------- Protected Methods //
+
+    // Private methods ----------------------------------------------------- Private methods //
+
+    // Getters & Setters ------------------------------------------------- Getters & Setters //
+
+    public Measure<Currency> getCost() {
+        return cost;
+    }
+
+    public void setCost(Measure<Currency> cost) {
+        this.cost = cost;
+    }
+
+    public String getGoods() {
+        return goods;
+    }
+
+    public void setGoods(String goods) {
+        this.goods = goods;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+    public Measure<Length> getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Measure<Length> speed) {
+        this.speed = speed;
+    }
+} // End of class

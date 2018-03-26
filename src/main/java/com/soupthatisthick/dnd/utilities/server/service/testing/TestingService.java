@@ -1,9 +1,13 @@
 package com.soupthatisthick.dnd.utilities.server.service.testing;
 
+import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.AllyRepository;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.EncounterRepository;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.EnemyRepository;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ErrorCode;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.EchoRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogMessageRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +18,17 @@ import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 /**
  * Created by Owner on 9/9/2017.
  */
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Service
 @Transactional(readOnly = true)
 public class TestingService {
+
+    @Autowired
+    private EncounterRepository encounterRepository;
+    @Autowired
+    private AllyRepository allyRepository;
+    @Autowired
+    private EnemyRepository enemyRepository;
 
     @Transactional
     public void logMessageRequest(@NotNull LogMessageRequest request) throws TestingServiceException {
@@ -42,16 +54,19 @@ public class TestingService {
     }
 
     @Transactional
-    public void cleanDatabase() throws TestingServiceException {
-        LOG.info("Cleaning the database.");
+    public void wipeDatabase() throws TestingServiceException {
+        LOG.info("Wiping the database.");
 
         try {
-
+            allyRepository.deleteAllInBatch();
+            enemyRepository.deleteAllInBatch();
+            encounterRepository.deleteAllInBatch();
         } catch (Exception e) {
             throw new TestingServiceException(ErrorCode.TESTING_WIPE_DATABASE_FAILED, "Failed to clean the repositories.");
         }
     }
 
+    @SuppressWarnings("EmptyTryBlock")
     @Transactional
     public void initDatabase() throws TestingServiceException {
         LOG.info("Initializing the database data.");
@@ -66,7 +81,7 @@ public class TestingService {
     @Transactional
     public void resetDatabase() throws TestingServiceException {
         LOG.info("Resetting the database.");
-        cleanDatabase();
+        wipeDatabase();
         initDatabase();
     }
 

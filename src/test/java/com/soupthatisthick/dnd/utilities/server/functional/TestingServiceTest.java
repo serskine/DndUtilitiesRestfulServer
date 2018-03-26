@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.fail;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 public class TestingServiceTest extends BaseSpringBootTest {
 
