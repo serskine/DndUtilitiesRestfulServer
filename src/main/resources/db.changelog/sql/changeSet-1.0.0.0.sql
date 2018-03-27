@@ -8,7 +8,7 @@ CREATE TABLE "encounter" (
   "name"         VARCHAR(256)                NOT NULL
 );
 
-CREATE SEQUENCE "category_sg"
+CREATE SEQUENCE "encounter_sg"
 MINVALUE 1
 START WITH 1
 INCREMENT BY 50

@@ -1,11 +1,9 @@
-package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter;
+package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.builder;
 
 import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base.BaseHibernateEntity;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.persistence.Column;

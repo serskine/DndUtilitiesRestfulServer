@@ -4,10 +4,10 @@ import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.BasePageRequest;
 import com.soupthatisthick.dnd.utilities.server.api.common.PagedApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.PagingStats;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.EncounterEntity;
-import com.soupthatisthick.dnd.utilities.server.service.encounter.EncounterBuilderService;
-import com.soupthatisthick.dnd.utilities.server.service.encounter.model.EncounterRequest;
-import com.soupthatisthick.dnd.utilities.server.service.encounter.model.NewEncounterRequest;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.builder.EncounterEntity;
+import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.EncounterBuilderService;
+import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.EncounterRequest;
+import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.NewEncounterRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ import javax.validation.Valid;
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Api(description = "Testing Management Endpoint")
 @RestController
-@RequestMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/encountermeasure-builder", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EncounterBuilderController extends BaseApiController {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants
@@ -41,28 +41,28 @@ public class EncounterBuilderController extends BaseApiController {
 
 	// Public Methods ------------------------------------------------------------------------------------ Public Methods
 
-	@ApiOperation(value = "Clears all units from the specified encounter.")
+	@ApiOperation(value = "Clears all units from the specified encountermeasure.")
 	@RequestMapping(value="/clear-units", method = RequestMethod.POST)
 	public ApiResponse deleteAll(@RequestBody @Valid EncounterRequest request) {
 		encounterBuilderService.clearUnits(request);
 		return new ApiResponse<>();
 	}
 
-	@ApiOperation(value = "Clears all allies from the specified encounter.")
+	@ApiOperation(value = "Clears all allies from the specified encountermeasure.")
 	@RequestMapping(value="/clear-allies", method = RequestMethod.POST)
 	public ApiResponse deleteAllies(@RequestBody @Valid EncounterRequest request) {
 		encounterBuilderService.clearAllies(request);
 		return new ApiResponse<>();
 	}
 
-	@ApiOperation(value = "Clears all enemies from the specified encounter.")
+	@ApiOperation(value = "Clears all enemies from the specified encountermeasure.")
 	@RequestMapping(value="/clear-enemies", method = RequestMethod.POST)
 	public ApiResponse deleteEnemies(@RequestBody @Valid EncounterRequest request) {
 		encounterBuilderService.clearEnemies(request);
 		return new ApiResponse<>();
 	}
 
-	@ApiOperation(value = "Creates a new encounter")
+	@ApiOperation(value = "Creates a new encountermeasure")
 	@RequestMapping(value="/create", method = RequestMethod.POST)
 	public ApiResponse<EncounterEntity> createEncounter(@RequestBody @Valid NewEncounterRequest request) {
 		return new ApiResponse<>(encounterBuilderService.newEncounter(request));

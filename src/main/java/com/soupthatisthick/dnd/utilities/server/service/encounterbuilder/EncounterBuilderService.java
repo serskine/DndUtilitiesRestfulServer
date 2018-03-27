@@ -1,15 +1,15 @@
-package com.soupthatisthick.dnd.utilities.server.service.encounter;
+package com.soupthatisthick.dnd.utilities.server.service.encounterbuilder;
 
 import com.soupthatisthick.dnd.utilities.server.api.common.BasePageRequest;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.AllyEntity;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.EncounterEntity;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.EnemyEntity;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.builder.AllyEntity;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.builder.EncounterEntity;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.builder.EnemyEntity;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.AllyRepository;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.EncounterRepository;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.EnemyRepository;
-import com.soupthatisthick.dnd.utilities.server.service.encounter.model.EncounterListRequest;
-import com.soupthatisthick.dnd.utilities.server.service.encounter.model.EncounterRequest;
-import com.soupthatisthick.dnd.utilities.server.service.encounter.model.NewEncounterRequest;
+import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.EncounterListRequest;
+import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.EncounterRequest;
+import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.NewEncounterRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +78,7 @@ public class EncounterBuilderService {
 		clearAllies(request);
 		clearEnemies(request);
 	}
+
 
 	// Protected Methods ------------------------------------------------------------------------------ Protected Methods
 

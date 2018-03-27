@@ -1,33 +1,39 @@
-package com.soupthatisthick.dnd.utilities.server.service.encounter.model;
+package com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model;
 
 import com.soupthatisthick.dnd.utilities.server.service.common.base.BaseModel;
 
 import javax.validation.constraints.NotNull;
 
-public class EncounterRequest extends BaseModel {
+public class EncounterMeasurementResponse extends BaseModel {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants
 
 	// Instance Variables ---------------------------------------------------------------------------- Instance Variables
 
 	@NotNull
-	private Long id;
+	private ThreatValue threatValue;
 
 	// Constructors ---------------------------------------------------------------------------------------- Constructors
 
+	private EncounterMeasurementResponse() {}
+	public EncounterMeasurementResponse(@NotNull ThreatValue threatValue) {
+		this.threatValue = threatValue;
+	}
+
 	// Public Methods ------------------------------------------------------------------------------------ Public Methods
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 	// Protected Methods ------------------------------------------------------------------------------ Protected Methods
 
 	// Private Methods ---------------------------------------------------------------------------------- Private Methods
 
 	// Getters & Setters ------------------------------------------------------------------------------ Getters & Setters
+
+	public ThreatValue getThreatValue() {
+		return threatValue;
+	}
+
+	public void setThreatValue(ThreatValue threatValue) {
+		this.threatValue = threatValue;
+	}
 
 } // end of class

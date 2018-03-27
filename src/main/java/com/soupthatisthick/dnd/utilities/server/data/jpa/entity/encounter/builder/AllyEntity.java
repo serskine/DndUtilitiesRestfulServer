@@ -1,8 +1,6 @@
-package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter;
+package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.builder;
 
 import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base.BaseHibernateEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.annotation.Nullable;
@@ -20,7 +18,7 @@ public class AllyEntity extends BaseHibernateEntity {
 	@Column(name = "level", nullable = false)
 	private int level;
 
-	@JoinColumn(name = "encounter")
+	@JoinColumn(name = "encountermeasure")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@PodamExclude
 	@Nullable

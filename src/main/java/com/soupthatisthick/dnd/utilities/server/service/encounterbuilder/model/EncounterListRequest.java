@@ -1,4 +1,4 @@
-package com.soupthatisthick.dnd.utilities.server.service.encounter.model;
+package com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model;
 
 import com.soupthatisthick.dnd.utilities.server.api.common.BasePageRequest;
 
