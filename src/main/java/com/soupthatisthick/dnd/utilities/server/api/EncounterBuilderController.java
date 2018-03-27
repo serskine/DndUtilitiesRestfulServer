@@ -5,7 +5,7 @@ import com.soupthatisthick.dnd.utilities.server.api.common.BasePageRequest;
 import com.soupthatisthick.dnd.utilities.server.api.common.PagedApiResponse;
 import com.soupthatisthick.dnd.utilities.server.api.common.PagingStats;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.builder.EncounterEntity;
-import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.EncounterBuilderService;
+import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.EncounterBuilderService;
 import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.EncounterRequest;
 import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.model.NewEncounterRequest;
 import io.swagger.annotations.Api;
