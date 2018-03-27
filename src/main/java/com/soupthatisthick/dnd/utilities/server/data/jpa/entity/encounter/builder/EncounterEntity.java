@@ -6,12 +6,13 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotEmpty;
 import uk.co.jemos.podam.common.PodamExclude;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "encounter")
+@SequenceGenerator(name = "sg", sequenceName = "encounter_sg")
 public class EncounterEntity extends BaseHibernateEntity {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants
@@ -21,12 +22,12 @@ public class EncounterEntity extends BaseHibernateEntity {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "allyEntity", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
 	@Cascade(value = CascadeType.DELETE)
 	@PodamExclude
 	private List<AllyEntity> allies = new ArrayList<>();
 
-	@OneToMany(mappedBy = "enemyEntity", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
 	@Cascade(value = CascadeType.DELETE)
 	@PodamExclude
 	private List<EnemyEntity> enemies = new ArrayList<>();

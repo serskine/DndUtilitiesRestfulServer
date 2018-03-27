@@ -5,7 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "xp_threshold")
+@SequenceGenerator(name = "sg", sequenceName = "xp_threshold_sg")
 public class XpThresholdEntity extends BaseHibernateEntity {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants

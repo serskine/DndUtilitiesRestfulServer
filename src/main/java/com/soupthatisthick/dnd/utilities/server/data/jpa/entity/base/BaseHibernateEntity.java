@@ -4,12 +4,10 @@ import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import uk.co.jemos.podam.common.PodamExclude;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
+@MappedSuperclass
 public abstract class BaseHibernateEntity implements Serializable {
 
     // Constants ----------------------------------------------------------------- Constants //

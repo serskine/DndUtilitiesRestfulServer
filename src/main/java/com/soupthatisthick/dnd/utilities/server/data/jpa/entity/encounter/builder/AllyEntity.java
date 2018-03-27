@@ -4,11 +4,11 @@ import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base.BaseHiberna
 import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.annotation.Nullable;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "ally")
+@SequenceGenerator(name = "sg", sequenceName = "ally_sg")
 public class AllyEntity extends BaseHibernateEntity {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants
@@ -18,8 +18,8 @@ public class AllyEntity extends BaseHibernateEntity {
 	@Column(name = "level", nullable = false)
 	private int level;
 
-	@JoinColumn(name = "encountermeasure")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "encounter")
+	@ManyToOne(fetch = FetchType.LAZY, optional=false)
 	@PodamExclude
 	@Nullable
 	private EncounterEntity encounterEntity;
