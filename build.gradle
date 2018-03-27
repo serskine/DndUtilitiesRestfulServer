@@ -52,6 +52,7 @@ dependencies {
 	compile 'com.mashape.unirest:unirest-java:1.4.9'
 	compile 'com.google.guava:guava:23.0'
 	compile 'commons-io:commons-io:2.4'
+
 	compile 'io.springfox:springfox-swagger2:2.7.0'
 	compile 'io.springfox:springfix-swagger-ui:2.7.0'
 	compile 'io.springfox:springfox-bean-validators:2.7.0'

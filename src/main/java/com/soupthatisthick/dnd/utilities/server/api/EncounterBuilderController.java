@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
-@Api(description = "Testing Management Endpoint")
+@Api(description = "Encounter builder endpoint")
 @RestController
-@RequestMapping(value = "/encountermeasure-builder", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/encounter-builder", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EncounterBuilderController extends BaseApiController {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants
@@ -41,28 +41,28 @@ public class EncounterBuilderController extends BaseApiController {
 
 	// Public Methods ------------------------------------------------------------------------------------ Public Methods
 
-	@ApiOperation(value = "Clears all units from the specified encountermeasure.")
+	@ApiOperation(value = "Clears all units from the specified encounter.")
 	@RequestMapping(value="/clear-units", method = RequestMethod.POST)
 	public ApiResponse deleteAll(@RequestBody @Valid EncounterRequest request) {
 		encounterBuilderService.clearUnits(request);
 		return new ApiResponse<>();
 	}
 
-	@ApiOperation(value = "Clears all allies from the specified encountermeasure.")
+	@ApiOperation(value = "Clears all allies from the specified encounter.")
 	@RequestMapping(value="/clear-allies", method = RequestMethod.POST)
 	public ApiResponse deleteAllies(@RequestBody @Valid EncounterRequest request) {
 		encounterBuilderService.clearAllies(request);
 		return new ApiResponse<>();
 	}
 
-	@ApiOperation(value = "Clears all enemies from the specified encountermeasure.")
+	@ApiOperation(value = "Clears all enemies from the specified encounter.")
 	@RequestMapping(value="/clear-enemies", method = RequestMethod.POST)
 	public ApiResponse deleteEnemies(@RequestBody @Valid EncounterRequest request) {
 		encounterBuilderService.clearEnemies(request);
 		return new ApiResponse<>();
 	}
 
-	@ApiOperation(value = "Creates a new encountermeasure")
+	@ApiOperation(value = "Creates a new encounter")
 	@RequestMapping(value="/create", method = RequestMethod.POST)
 	public ApiResponse<EncounterEntity> createEncounter(@RequestBody @Valid NewEncounterRequest request) {
 		return new ApiResponse<>(encounterBuilderService.newEncounter(request));

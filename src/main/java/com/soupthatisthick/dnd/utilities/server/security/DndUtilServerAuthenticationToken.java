@@ -8,7 +8,31 @@ import java.util.Collection;
 /**
  * Created by Owner on 9/9/2017.
  */
+@SuppressWarnings("WeakerAccess")
 public class DndUtilServerAuthenticationToken implements Authentication {
+
+    private boolean auth = true;
+    private final Object credentials;
+    private final Object details;
+    private final Object principal;
+    private final String name;
+
+    public DndUtilServerAuthenticationToken() {
+        this("credentials", "details", "principal", "name");
+    }
+
+    public DndUtilServerAuthenticationToken(
+            final Object credentials,
+            final Object details,
+            final Object principal,
+            final String name
+    ) {
+        this.credentials = credentials;
+        this.details = details;
+        this.principal = principal;
+        this.name = name;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -16,31 +40,31 @@ public class DndUtilServerAuthenticationToken implements Authentication {
 
     @Override
     public Object getCredentials() {
-        return null;
+        return credentials;
     }
 
     @Override
     public Object getDetails() {
-        return null;
+        return details;
     }
 
     @Override
     public Object getPrincipal() {
-        return null;
+        return principal;
     }
 
     @Override
     public boolean isAuthenticated() {
-        return false;   // By default we are not authenticated
+        return auth;   // By default we are authenticated
     }
 
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-        // Do nothing. This can't be changed for the time being
+        this.auth = isAuthenticated;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 }

@@ -5,7 +5,9 @@ import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
 import de.codecentric.boot.admin.config.EnableAdminServer;
 import liquibase.integration.spring.SpringLiquibase;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -37,9 +39,14 @@ import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
         @PropertySource(value = "classpath:/com/soupthatisthick/dnd/utilities/server/config/application-test.properties", ignoreResourceNotFound = true),
         @PropertySource(value = "file:/opt/dnd-utilities-server/config/application-test.properties", ignoreResourceNotFound = true)
 })
-@EnableAdminServer
 @EnableAsync
-public class DndUtilitiesServerApplication extends SpringBootServletInitializer {
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+public class DndUtilitiesServerApplication extends SpringBootServletInitializer implements InitializingBean {
+
+    @Value("${app.environment}")
+    private String envr;
+    @Value("${app.sso.proxy.bypass}")
+    private String nonProxy;
 
     @Autowired
     private DataSource primaryDataSource;
@@ -85,6 +92,21 @@ public class DndUtilitiesServerApplication extends SpringBootServletInitializer 
     @Bean(name = "dataSource")
     public DataSource dataSource() {
         return primaryDataSource;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        if (envr!=null) {
+            System.setProperty("app.environment", envr);
+        } else{
+            LOG.warning("app.environment not set.");
+        }
+
+        if (nonProxy!= null) {
+            System.setProperty("http.nonProxyHosts", nonProxy);
+        } else {
+            LOG.warning("http.nonProxyHosts not set.");
+        }
     }
 }
 

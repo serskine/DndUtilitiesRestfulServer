@@ -21,9 +21,9 @@ import javax.validation.Valid;
 
 
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
-@Api(description = "Testing Management Endpoint")
+@Api(description = "Encounter Measurement Endpoint")
 @RestController
-@RequestMapping(value = "/encountermeasure-measure", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/encounter-measure", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EncounterMeasureController {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants
@@ -49,7 +49,7 @@ public class EncounterMeasureController {
 		return new ApiResponse<>(encounterMeasureService.getAveragePartyLevel(request));
 	}
 
-	@ApiOperation(value = "Measures encountermeasure threat level using the method provided in the Dungeon Master Guide.")
+	@ApiOperation(value = "Measures encounter measure threat level using the method provided in the Dungeon Master Guide.")
 	@RequestMapping(value="/measure-dmg", method = RequestMethod.POST)
 	public ApiResponse<EncounterMeasurementResponse> dmgMeasurement(@RequestBody @Valid EncounterMeasurementRequest request) throws ServiceException {
 		return new ApiResponse<>(encounterMeasureService.dmgMeasurement(request));

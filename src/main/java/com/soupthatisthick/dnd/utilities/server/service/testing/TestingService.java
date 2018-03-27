@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 
 import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
@@ -33,6 +34,16 @@ public class TestingService {
     private EnemyRepository enemyRepository;
     @Autowired
     private XpThresholdRepository xpThresholdRepository;
+
+	@PostConstruct
+	public void init() {
+		LOG.info("Initializing Testing Service with test data");
+		try {
+			initDatabase();
+		} catch (Exception e) {
+			LOG.warning("Failed to initialize the testing service properly. " + e.getMessage(), e);
+		}
+	}
 
     @Transactional
     public void logMessageRequest(@NotNull LogMessageRequest request) throws TestingServiceException {
@@ -132,7 +143,7 @@ public class TestingService {
                 "deadly"
         );
         sb.append("\n");
-        sb.append("header");
+        sb.append(header);
 
         for(int i=0; i<table.length; i++) {
             XpThresholdEntity entity = new XpThresholdEntity(
