@@ -74,7 +74,7 @@ public class EncounterMeasureService {
 		for(Integer allyLevel : request.getAllyLevels()) {
 			XpThresholdEntity xpThresholdEntity = xpThresholdRepository.findByLevel(allyLevel);
 			if (xpThresholdEntity==null) {
-				throw new ServiceException(ErrorCode.UNKNOWN_ERROR, "No thresholds defined to level " + allyLevel + ".");
+				throw new ServiceException(ErrorCode.UNKNOWN_ERROR, "No thresholds defined for ally level " + allyLevel + ".");
 			}
 			partyEasy += xpThresholdEntity.getEasy();
 			partyModerate += xpThresholdEntity.getModerate();

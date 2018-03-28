@@ -9,6 +9,7 @@ import com.soupthatisthick.dnd.utilities.server.service.common.base.ErrorCode;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.EchoRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogMessageRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
+import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,7 @@ public class TestingService {
     private XpThresholdRepository xpThresholdRepository;
 
 	@PostConstruct
+    @Transactional
 	public void init() {
 		LOG.info("Initializing Testing Service with test data");
 		try {
@@ -109,7 +111,8 @@ public class TestingService {
     /**
      * This will initialize all the xp thresholds for levels 1-20
      */
-    private void initXpThresholds() {
+    @Transactional
+    public void initXpThresholds() {
         LOG.info("Initializing xp thresholds.");
         final Integer[][] table = new Integer[][] {
                 {1, 25, 50, 75, 100},

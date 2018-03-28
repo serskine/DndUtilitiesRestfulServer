@@ -40,13 +40,8 @@ import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
         @PropertySource(value = "file:/opt/dnd-utilities-server/config/application-test.properties", ignoreResourceNotFound = true)
 })
 @EnableAsync
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableAspectJAutoProxy(proxyTargetClass = false)
 public class DndUtilitiesServerApplication extends SpringBootServletInitializer implements InitializingBean {
-
-    @Value("${app.environment}")
-    private String envr;
-    @Value("${app.sso.proxy.bypass}")
-    private String nonProxy;
 
     @Autowired
     private DataSource primaryDataSource;
@@ -96,17 +91,7 @@ public class DndUtilitiesServerApplication extends SpringBootServletInitializer 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (envr!=null) {
-            System.setProperty("app.environment", envr);
-        } else{
-            LOG.warning("app.environment not set.");
-        }
-
-        if (nonProxy!= null) {
-            System.setProperty("http.nonProxyHosts", nonProxy);
-        } else {
-            LOG.warning("http.nonProxyHosts not set.");
-        }
+        LOG.info("Initializing applications after properties have been set.");
     }
 }
 

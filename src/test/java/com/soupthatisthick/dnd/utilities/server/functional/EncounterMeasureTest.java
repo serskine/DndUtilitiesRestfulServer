@@ -30,6 +30,8 @@ public class EncounterMeasureTest extends BaseSpringBootTest {
 
 	@Test
 	public void dndMeasureEncounter() throws ServiceException {
+		testingService.initDatabase();
+
 		EncounterMeasurementRequest request = new EncounterMeasurementRequest();
 		List<Integer> allies = Arrays.asList(1,2,3,4,5);
 		List<Integer> enemyXp = Arrays.asList(25, 25, 25, 25, 25);

@@ -21,7 +21,7 @@ public class BaseIT {
 
     // Instance Variables ----------------------------------------------- Instance Variables //
 
-    private static final int PORT = 5000;
+    private static final int PORT = 8000;
     private static final String SERVER = String.format("http://localhost:%d/", PORT);
 
     // Constructors ----------------------------------------------------------- Constructors //
