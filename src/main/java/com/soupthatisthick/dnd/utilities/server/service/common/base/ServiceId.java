@@ -5,7 +5,9 @@ package com.soupthatisthick.dnd.utilities.server.service.common.base;
  */
 public enum ServiceId {
     UNKNOWN (0),
-    TESTING (1);
+    TESTING (1),
+    ENCOUNTER_BUILDER (2),
+    ENCOUNTER_MEASURE (3);
 
     private int value;
 

@@ -13,13 +13,13 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 @Configuration
 public class CommonConfig {
 
-    @Autowired
-    private Jackson2ObjectMapperBuilder builder;
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        return objectMapper;
-    }
+//    @Autowired
+//    private Jackson2ObjectMapperBuilder builder;
+//
+//    @Bean
+//    public ObjectMapper objectMapper() {
+//        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
+//        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+//        return objectMapper;
+//    }
 }

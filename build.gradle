@@ -30,39 +30,37 @@ repositories {
 
 
 dependencies {
-	compile 'org.springframework.boot:spring-boot-starter'
-	compile 'org.springframework.boot:spring-boot-starter-actuator'
-	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compile 'org.springframework.boot:spring-boot-starter-security'
-	compile 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.springframework.boot:spring-boot-starter-tomcat'
-	compile 'org.springframework.boot:spring-boot-starter-aop'
-//	compile 'org.springframework.boot:spring-boot-starter-log4j2'
+    compile 'org.springframework.boot:spring-boot-starter-log4j2'
 
-	compile 'de.codecentric:spring-boot-admin-server:1.5.4'
-	compile 'de-codecentric:spring-boot-admin-server-ui:1.5.4'
-	compile 'de-codecentric:spring-boot-admin-server-client:1.5.4'
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
 
-	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
-	compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
-	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile 'de.codecentric:spring-boot-admin-server:1.5.4'
+    compile 'de.codecentric:spring-boot-admin-server-ui:1.5.4'
+//    compile 'de.codecentric:spring-boot-admin-server-client:1.5.4'
 
-	compile 'uk.co.jemos.podam:podam:7.0.5.RELEASE'
-	compile 'io.codearte.jfairy:jfairy:0.5.7'
-	compile 'com.mashape.unirest:unirest-java:1.4.9'
-	compile 'com.google.guava:guava:23.0'
-	compile 'commons-io:commons-io:2.4'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile 'uk.co.jemos.podam:podam:7.0.5.RELEASE'
+    compile 'io.codearte.jfairy:jfairy:0.5.7'
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'com.google.guava:guava:23.0'
+    compile 'commons-io:commons-io:2.4'
+    compile 'io.springfox:springfox-swagger2:2.7.0'
+    compile 'io.springfox:springfox-swagger-ui:2.7.0'
+    compile 'io.springfox:springfox-bean-validators:2.7.0'
+    compile 'io.springfox:springfox-data-rest:2.7.0'
+    compile 'org.liquibase:liquibase-core'
+    compile 'org.hsqldb:hsqldb'
 
-	compile 'io.springfox:springfox-swagger2:2.7.0'
-	compile 'io.springfox:springfix-swagger-ui:2.7.0'
-	compile 'io.springfox:springfox-bean-validators:2.7.0'
-	compile "io.springfox:springfox-data-rest:2.7.0"
+    runtime 'org.springframework.boot:spring-boot-devtools'
 
-	compile 'org.liquibase:liquibase-core'
-	compile 'org.hsqldb:hsqldb'
-
-	runtime 'org.springframework.boot:spring-boot-devtools'
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
-	testCompile 'org.springframework.security:spring-security-test'
-
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.security:spring-security-test'
 }

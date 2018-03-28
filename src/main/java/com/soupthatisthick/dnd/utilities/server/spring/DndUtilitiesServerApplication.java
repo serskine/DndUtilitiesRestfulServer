@@ -1,15 +1,13 @@
 package com.soupthatisthick.dnd.utilities.server.spring;
 
 
-import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
-import com.soupthatisthick.dnd.utilities.server.util.logger.Logger;
-import de.codecentric.boot.admin.config.EnableAdminServer;
+import com.soupthatisthick.dnd.utilities.server.util.podam.ResourceUtil;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -23,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Executor;
 
 import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
@@ -30,6 +29,7 @@ import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 /**
  * Created by Owner on 9/9/2017.
  */
+//@SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableJpaRepositories({"com.soupthatisthick.dnd.utilities.server.data.jpa.*"})
 @EntityScan({"com.soupthatisthick.dnd.utilities.server.data.jpa.*"})
@@ -39,15 +39,18 @@ import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
         @PropertySource(value = "classpath:/com/soupthatisthick/dnd/utilities/server/config/application-test.properties", ignoreResourceNotFound = true),
         @PropertySource(value = "file:/opt/dnd-utilities-server/config/application-test.properties", ignoreResourceNotFound = true)
 })
-@EnableAsync
-@EnableAspectJAutoProxy(proxyTargetClass = false)
+//@EnableAsync
+//@EnableAspectJAutoProxy(proxyTargetClass = false)
 public class DndUtilitiesServerApplication extends SpringBootServletInitializer implements InitializingBean {
+    private static final String RESOURCE_PATH = "/com/soupthatisthick/dnd/utilities/server/";
 
     @Autowired
     private DataSource primaryDataSource;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         SpringApplication.run(DndUtilitiesServerApplication.class, args);
+        String banner = ResourceUtil.readResourceIntoString(RESOURCE_PATH + "/config/banner.txt");
+        LOG.debug("\n{}", banner);
     }
 
     @Override

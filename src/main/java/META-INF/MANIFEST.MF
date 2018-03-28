@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.soupthatisthick.dnd.utilities.server.spring.DndUtiliti
+ esServerApplication
+
