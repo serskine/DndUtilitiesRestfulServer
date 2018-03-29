@@ -8,6 +8,7 @@ import com.soupthatisthick.dnd.utilities.server.service.testing.model.EchoReques
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogMessageRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
+import com.soupthatisthick.dnd.utilities.server.util.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,7 +95,7 @@ public class TestingService {
             initXpThresholds();
             initChallengeRatings();
         } catch (Exception e) {
-            throw new TestingServiceException(ErrorCode.TESTING_INIT_DATABASE_FAILED, "Failed to initialize the repositories.");
+            throw new TestingServiceException(ErrorCode.TESTING_INIT_DATABASE_FAILED, "Failed to initialize the repositories. " + e.getMessage(), e);
         }
     }
 
@@ -146,14 +147,11 @@ public class TestingService {
                 {"29", "0"},
         };
 
-        StringBuilder sb = new StringBuilder();
-        final String header = String.format(" - %7s, %7s, %7s, %7s, %7s\n",
-                "cr",
-                "xp"
-        );
-        sb.append("\n");
-        sb.append(header);
+        String tableString = Text.tableString(table);
+        LOG.debug("\n____ TABLE ____\n{}", tableString);
 
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format(" - %7s  %7s\n", "cr", "xp"));
         for(int i=0; i<table.length; i++) {
             CrEntity entity = new CrEntity(
                     Float.parseFloat(table[i][0]),
@@ -167,7 +165,6 @@ public class TestingService {
             sb.append(line);
         }
 
-        LOG.info(sb.toString());
     }
     /**
      * This will initialize all the xp thresholds for levels 1-20
