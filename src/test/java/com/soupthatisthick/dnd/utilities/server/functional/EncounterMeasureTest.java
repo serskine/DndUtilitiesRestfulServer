@@ -2,7 +2,7 @@ package com.soupthatisthick.dnd.utilities.server.functional;
 
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.EncounterMeasureService;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementRequest;
+import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.MeasurementUsingXpRequest;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementResponse;
 import com.soupthatisthick.dnd.utilities.server.util.BaseSpringBootTest;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class EncounterMeasureTest extends BaseSpringBootTest {
 	public void dndMeasureEncounter() throws ServiceException {
 		testingService.initDatabase();
 
-		EncounterMeasurementRequest request = new EncounterMeasurementRequest();
+		MeasurementUsingXpRequest request = new MeasurementUsingXpRequest();
 		List<Integer> allies = Arrays.asList(1,2,3,4,5);
 		List<Integer> enemyXp = Arrays.asList(25, 25, 25, 25, 25);
 		request.setAllyLevels(allies);

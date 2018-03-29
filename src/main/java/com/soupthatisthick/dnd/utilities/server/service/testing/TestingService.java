@@ -1,10 +1,8 @@
 package com.soupthatisthick.dnd.utilities.server.service.testing;
 
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.CrEntity;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.measure.XpThresholdEntity;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.AllyRepository;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.EncounterRepository;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.EnemyRepository;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.XpThresholdRepository;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.*;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ErrorCode;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.EchoRequest;
 import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogMessageRequest;
@@ -35,6 +33,8 @@ public class TestingService {
     private EnemyRepository enemyRepository;
     @Autowired
     private XpThresholdRepository xpThresholdRepository;
+    @Autowired
+    private CrRepository crRepository;
 
 	@PostConstruct
     @Transactional
@@ -79,6 +79,7 @@ public class TestingService {
             enemyRepository.deleteAllInBatch();
             encounterRepository.deleteAllInBatch();
             xpThresholdRepository.deleteAllInBatch();
+            crRepository.deleteAllInBatch();
         } catch (Exception e) {
             throw new TestingServiceException(ErrorCode.TESTING_WIPE_DATABASE_FAILED, "Failed to clean the repositories.");
         }
@@ -91,6 +92,7 @@ public class TestingService {
 
         try {
             initXpThresholds();
+            initChallengeRatings();
         } catch (Exception e) {
             throw new TestingServiceException(ErrorCode.TESTING_INIT_DATABASE_FAILED, "Failed to initialize the repositories.");
         }
@@ -108,6 +110,65 @@ public class TestingService {
         return echoRequest.getMessage();
     }
 
+
+    public void initChallengeRatings() {
+        LOG.info("Initializing challenge ratings.");
+        final String[][] table = new String[][] {
+                {"0", "0"},
+                {"1", "0"},
+                {"2", "0"},
+                {"3", "0"},
+                {"4", "0"},
+                {"5", "0"},
+                {"6", "0"},
+                {"7", "0"},
+                {"8", "0"},
+                {"9", "0"},
+                {"10", "0"},
+                {"11", "0"},
+                {"12", "0"},
+                {"13", "0"},
+                {"14", "0"},
+                {"15", "0"},
+                {"16", "0"},
+                {"17", "0"},
+                {"18", "0"},
+                {"19", "0"},
+                {"20", "0"},
+                {"21", "0"},
+                {"22", "0"},
+                {"23", "0"},
+                {"24", "0"},
+                {"25", "0"},
+                {"26", "0"},
+                {"27", "0"},
+                {"28", "0"},
+                {"29", "0"},
+        };
+
+        StringBuilder sb = new StringBuilder();
+        final String header = String.format(" - %7s, %7s, %7s, %7s, %7s\n",
+                "cr",
+                "xp"
+        );
+        sb.append("\n");
+        sb.append(header);
+
+        for(int i=0; i<table.length; i++) {
+            CrEntity entity = new CrEntity(
+                    Float.parseFloat(table[i][0]),
+                    Integer.parseInt(table[i][1])
+            );
+            CrEntity savedEntity = crRepository.save(entity);
+            final String line = String.format(" - %7d, %7d\n",
+                    savedEntity.getCr(),
+                    savedEntity.getXp()
+            );
+            sb.append(line);
+        }
+
+        LOG.info(sb.toString());
+    }
     /**
      * This will initialize all the xp thresholds for levels 1-20
      */

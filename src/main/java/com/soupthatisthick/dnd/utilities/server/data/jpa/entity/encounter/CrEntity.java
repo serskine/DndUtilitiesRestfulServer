@@ -1,24 +1,34 @@
-package com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model;
+package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter;
 
-import com.soupthatisthick.dnd.utilities.server.service.common.base.BaseModel;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base.BaseHibernateEntity;
 
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-public class EncounterMeasurementRequest extends BaseModel {
+@Entity
+@Table(name = "cr")
+@SequenceGenerator(name = "sg", sequenceName = "cr_sg")
+public class CrEntity extends BaseHibernateEntity {
 
 	// Constants ---------------------------------------------------------------------------------------------- Constants
 
 	// Instance Variables ---------------------------------------------------------------------------- Instance Variables
 
-	@NotNull
-	private List<Integer> allyLevels = new ArrayList<>();
+	@Column(name = "cr", nullable = false)
+	private Float cr;
 
-	@NotNull
-	private List<Integer> enemyXps = new ArrayList<>();
+	@Column(name = "xp", nullable = false)
+	private Integer xp;
 
 	// Constructors ---------------------------------------------------------------------------------------- Constructors
+
+	private CrEntity() {}
+	public CrEntity(float cr, int xp) {
+		this.cr = cr;
+		this.xp = xp;
+	}
 
 	// Public Methods ------------------------------------------------------------------------------------ Public Methods
 
@@ -28,20 +38,20 @@ public class EncounterMeasurementRequest extends BaseModel {
 
 	// Getters & Setters ------------------------------------------------------------------------------ Getters & Setters
 
-	public List<Integer> getAllyLevels() {
-		return allyLevels;
+	public Float getCr() {
+		return cr;
 	}
 
-	public void setAllyLevels(List<Integer> allyLevels) {
-		this.allyLevels = allyLevels;
+	public void setCr(Float cr) {
+		this.cr = cr;
 	}
 
-	public List<Integer> getEnemyXps() {
-		return enemyXps;
+	public Integer getXp() {
+		return xp;
 	}
 
-	public void setEnemyXps(List<Integer> enemyXps) {
-		this.enemyXps = enemyXps;
+	public void setXp(Integer xp) {
+		this.xp = xp;
 	}
 
 } // end of class

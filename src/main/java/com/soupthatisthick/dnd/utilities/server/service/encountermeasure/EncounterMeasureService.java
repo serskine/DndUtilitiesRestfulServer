@@ -1,14 +1,13 @@
 package com.soupthatisthick.dnd.utilities.server.service.encountermeasure;
 
+import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.CrEntity;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.encounter.measure.XpThresholdEntity;
+import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.CrRepository;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.XpThresholdRepository;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ErrorCode;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
 import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.EncounterBuilderService;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementRequest;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementResponse;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.PartyInfoRequest;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.ThreatValue;
+import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Service
@@ -30,6 +31,9 @@ public class EncounterMeasureService {
 
 	@Autowired
 	private XpThresholdRepository xpThresholdRepository;
+
+	@Autowired
+	private CrRepository crRepository;
 
 	// Constructors ---------------------------------------------------------------------------------------- Constructors
 
@@ -55,10 +59,32 @@ public class EncounterMeasureService {
 	}
 
 	/**
-	 * This method will measure an encountermeasure difficulty using the methods provided in the Dungeon Master Guide
-	 * @param request provided details for the encountermeasure
+	 * Converts it into a measurement using enemy xp and then returns the result.
+	 * @param request the enemies are listed by their cr value
+	 * @return a {@link EncounterMeasurementResponse}
+	 * @throws ServiceException if an exception occurs.
 	 */
-	public EncounterMeasurementResponse dmgMeasurement(@NotNull EncounterMeasurementRequest request) throws ServiceException {
+	public EncounterMeasurementResponse dmgMeasurement(@NotNull MeasurementUsingCrRequest request) throws ServiceException {
+		List<Integer> enemyXpValues = new ArrayList<>();
+		for(Float cr : request.getEnemyCrs()) {
+			CrEntity crEntity = crRepository.findByCr(cr);
+			if (crEntity==null) {
+				throw new ServiceException(ErrorCode.UNKNOWN_ERROR, "There is no known challenge rating value " + cr + ".");
+			}
+			enemyXpValues.add(crEntity.getXp());
+		}
+
+		MeasurementUsingXpRequest newRequest = new MeasurementUsingXpRequest();
+		newRequest.setAllyLevels(request.getAllyLevels());
+		newRequest.setEnemyXps(enemyXpValues);
+		return dmgMeasurement(newRequest);
+	}
+
+	/**
+	 * This method will measure an encounter difficulty using the methods provided in the Dungeon Master Guide
+	 * @param request provided details for the encounter
+	 */
+	public EncounterMeasurementResponse dmgMeasurement(@NotNull MeasurementUsingXpRequest request) throws ServiceException {
 		int numAllies = request.getAllyLevels().size();
 
 		if (numAllies<1) {

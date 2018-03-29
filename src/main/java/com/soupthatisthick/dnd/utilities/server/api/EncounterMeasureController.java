@@ -3,7 +3,8 @@ package com.soupthatisthick.dnd.utilities.server.api;
 import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.EncounterMeasureService;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementRequest;
+import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.MeasurementUsingCrRequest;
+import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.MeasurementUsingXpRequest;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementResponse;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.PartyInfoRequest;
 import io.swagger.annotations.Api;
@@ -50,8 +51,15 @@ public class EncounterMeasureController {
 	}
 
 	@ApiOperation(value = "Measures encounter measure threat level using the method provided in the Dungeon Master Guide.")
-	@RequestMapping(value="/measure-dmg", method = RequestMethod.POST)
-	public ApiResponse<EncounterMeasurementResponse> dmgMeasurement(@RequestBody @Valid EncounterMeasurementRequest request) throws ServiceException {
+	@RequestMapping(value="/measure-dmg-xp", method = RequestMethod.POST)
+	public ApiResponse<EncounterMeasurementResponse> dmgMeasurementUsingXp(@RequestBody @Valid MeasurementUsingXpRequest request) throws ServiceException {
+		return new ApiResponse<>(encounterMeasureService.dmgMeasurement(request));
+	}
+
+
+	@ApiOperation(value = "Measures encounter measure threat level using the method provided in the Dungeon Master Guide.")
+	@RequestMapping(value="/measure-dmg-cr", method = RequestMethod.POST)
+	public ApiResponse<EncounterMeasurementResponse> dmgMeasurement(@RequestBody @Valid MeasurementUsingCrRequest request) throws ServiceException {
 		return new ApiResponse<>(encounterMeasureService.dmgMeasurement(request));
 	}
 
