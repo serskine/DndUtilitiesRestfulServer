@@ -21,7 +21,7 @@ public class BasePageRequest extends BaseRequest {
     @NotNull
     @Min(value = 0)
     @ApiModelProperty(required = true, notes = "number of records to return")
-    private Integer pageSize = 10;
+    private Integer pageSize = Integer.MAX_VALUE;
 
     public Pageable asPageable() {
         return new PageRequest(pageNumber, pageSize);

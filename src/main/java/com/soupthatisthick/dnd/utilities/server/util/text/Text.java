@@ -73,15 +73,20 @@ public class Text {
         return output;
     }
 
-    public static final String fString(@Nullable String input, int fieldSize)
+    public static final String fString(@Nullable String input, int fieldSize) {
+        return fString(input, fieldSize, ' ');
+    }
+
+    public static final String fString(@Nullable String input, int fieldSize, char pad)
     {
+        String padding = Character.toString(pad);
         if (fieldSize<1) return "";
         if (input==null)
         {
-            return padString(" ", fieldSize);
+            return padString(padding, fieldSize);
         } else if (input.length()<=fieldSize)
         {
-            return input + padString(" ", fieldSize-input.length());
+            return input + padString(padding, fieldSize-input.length());
         } else {
             return input.substring(0, fieldSize);
         }
@@ -237,130 +242,85 @@ public class Text {
 
     /**
      * Prints out text in table format
-     * @param table
-     * @return
+     * @param table contains all the text without newlines
+     * @return the output string
      */
-    public static final String tableString(String[][] table) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n");
-        Map<Integer, Integer> columnWidths = new HashMap<>();
-        Map<Integer, Integer> rowHeights = new HashMap<>();
+    public static final String tableString(
+        @NotNull String[][] table,
+        String... headers
+    ) {
+        final String padding = "|";
+        final String headerPad = "_";
 
-        int numRows = table.length;
-        int numCols = 0;
+        if (table == null || table.length==0) {
+            return "\n";
+        } else {
+            final StringBuilder sb = new StringBuilder();
 
-        for(int row=0; row<table.length; row++) {
-            String[] theRow = table[row];
-            numCols = Math.max(0, theRow.length);
+            int[] cols = new int[0];
 
-            for(int col=0; col<theRow.length; col++) {
-                final String cell = theRow[col];
-                Dimension dimension = cellSize(cell);
-                rowHeights.put(row, Math.max(rowHeights.getOrDefault(row, 0), dimension.height));
-                columnWidths.put(col, Math.max(columnWidths.getOrDefault(col, 0), dimension.width));
-            }
-        }
-
-        String[] rowCells = new String[numRows];
-        for(int row=0; row<numRows; row++) {
-            String[] colCells = new String[numCols];
-            for(int col=0; col<numCols; col++) {
-                Dimension dimension = new Dimension();
-                dimension.setSize(columnWidths.get(col), rowHeights.get(row));
-                colCells[col] = wString(table[row][col], dimension);
-            }
-            rowCells[row] = appendWindowsHorizontal(colCells);
-        }
-
-        String tableCell = appendWindowsVertical(rowCells);
-
-        sb.append(tableCell);
-
-        sb.append("\n");
-        return sb.toString();
-    }
-
-    public static final Dimension cellSize(@NotNull String cell) {
-        Dimension dimension = new Dimension();
-        dimension.setSize(numCols(cell), numRows(cell));
-        return dimension;
-    }
-
-    public static final int numRows(@NotNull String text) {
-        int numRows = 1;
-        for(int i=0; i<text.length(); i++) {
-            if (text.charAt(i) == '\n') {
-                numRows++;
-            }
-        }
-        return numRows;
-    }
-
-    public static final int numCols(@NotNull String text) {
-        int maxWidth = 0;
-        int width = 0;
-        for(int i=0; i<text.length(); i++) {
-            if (text.charAt(i) != '\n') {
-                width++;
-            } else {
-                width = 0;
-            }
-            maxWidth = Math.max(maxWidth, width);
-        }
-        return maxWidth;
-    }
-
-    public static final String appendWindowsVertical(String... cells) {
-        StringBuilder sb = new StringBuilder();
-        for(String cell : cells) {
-            sb.append(cell);
-            sb.append('\n');
-        }
-        return padCellWindow(sb.toString());
-    }
-
-    public static final String appendWindowsHorizontal(String... cells) {
-        StringBuilder sb = new StringBuilder();
-        Map<Integer, List<String>> linesMap = new HashMap<>();
-        Map<Integer, Integer> widthMap = new HashMap<>();
-
-        for(int i=0; i<cells.length; i++) {
-            final String cell = cells[i];
-            List<String> lines = Arrays.asList(cell.split("\n"));
-            linesMap.put(i, lines);
-            widthMap.put(i, numCols(cell));
-        }
-
-        boolean done;
-        do {
-            done = true;
-            String thisLine = "";
-
-            for(int i=0; i<cells.length; i++) {
-                List<String> lines = linesMap.get(i);
-                int expectedWidth = widthMap.get(i);
-                if (lines==null || lines.isEmpty()) {
-                    thisLine += padString(" ", expectedWidth);
-                } else {
-                    final String field = lines.remove(0);
-                    thisLine += fString(field, expectedWidth);
-                    done = false;
+            if (headers.length > cols.length) {
+                cols = Arrays.copyOf(cols, headers.length);
+                for(int i=0; i<headers.length; i++) {
+                    cols[i] = Math.max(cols[i], headers[i].length());
                 }
             }
 
-            if (done != false) {
-                sb.append(thisLine);
-                sb.append("\n");
+            for(String[] row : table) {
+                if (row.length>0) {
+                    if (row.length > cols.length) {
+                        cols = Arrays.copyOf(cols, row.length);
+                    }
+                    if (row.length > headers.length) {
+                        int start = headers.length;
+                        headers = Arrays.copyOf(headers, row.length);
+                        for(int i=start; i<headers.length; i++) {
+                            headers[i] = "col[" + i + "]";
+                        }
+                    }
+                    for(int i=0; i<row.length; i++) {
+                        int width = Math.max(headers[i].length(), row[i].length());
+                        cols[i] = Math.max(cols[i], width);
+                    }
+                }
             }
-        } while(!done);
 
-        return sb.toString();
+            // Put in the headers
+            sb.append("\n");
+            final int numCols = Math.max(headers.length, cols.length);
+            for(int i=0; i<numCols; i++) {
+                if (i>0) {
+                    sb.append(padding);
+                }
+                sb.append(fString(headers[i], cols[i], ' '));
+            }
 
-    }
+            // Put in the divider line between the headers and the data
+            sb.append("\n");
+            for(int i=0; i<numCols; i++) {
+                if (i>0) {
+                    sb.append(padding);
+                }
+                sb.append(padString(headerPad, cols[i]));
+            }
 
-    public static final String padCellWindow(String cell) {
-        final Dimension dimension = cellSize(cell);
-        return wString(cell, dimension);
+            for(String[] row : table) {
+                sb.append("\n");
+                for(int i=0; i<cols.length; i++) {
+                    if (i>0) {
+                        sb.append(padding);
+                    }
+                    if (i<row.length) {
+                        sb.append(fString(row[i], cols[i]));
+                    } else {
+                        sb.append(padString("", cols[i]));
+                    }
+                }
+            }
+            sb.append("\n");
+
+            return sb.toString();
+        }
     }
 
 }

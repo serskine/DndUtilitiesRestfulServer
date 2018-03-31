@@ -1,8 +1,10 @@
 package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.lookup;
 
 import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base.DisplayableEntity;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
 public class NoteEntity extends DisplayableEntity {
 
@@ -14,6 +16,12 @@ public class NoteEntity extends DisplayableEntity {
     private String description;
 
     // Constructors ----------------------------------------------------------- Constructors //
+
+    private NoteEntity() {}
+    public NoteEntity(@NotEmpty String title, @NotNull String description) {
+        setTitle(title);
+        setDescription(description);
+    }
 
     // Public Methods ------------------------------------------------------- Public Methods //
 

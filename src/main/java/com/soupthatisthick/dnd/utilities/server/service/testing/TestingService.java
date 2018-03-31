@@ -147,22 +147,16 @@ public class TestingService {
                 {"29", "0"},
         };
 
-        String tableString = Text.tableString(table);
-        LOG.debug("\n____ TABLE ____\n{}", tableString);
-
+        String tableString = Text.tableString(table, "cr", "xp");
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format(" - %7s  %7s\n", "cr", "xp"));
+        sb.append(tableString);
+
         for(int i=0; i<table.length; i++) {
             CrEntity entity = new CrEntity(
                     Float.parseFloat(table[i][0]),
                     Integer.parseInt(table[i][1])
             );
             CrEntity savedEntity = crRepository.save(entity);
-            final String line = String.format(" - %7d, %7d\n",
-                    savedEntity.getCr(),
-                    savedEntity.getXp()
-            );
-            sb.append(line);
         }
 
     }

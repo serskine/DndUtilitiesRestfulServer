@@ -24,28 +24,7 @@ public class TextTest {
 
 	// Public Methods ------------------------------------------------------------------------------------ Public Methods
 
-	private void getMethods() {
-		Text.appendWindowsHorizontal("");
-		Text.appendWindowsVertical("");
-		Text.wString("", new Dimension(0, 0));
-		Text.padCellWindow("window");
-		Text.numRows("numRows");
-		Text.numCols("numCols");
-		Text.isBlank("");
-		Text.fString("field",5);
-		Text.toString(null);
-		Text.concat(",", "a", "b", "c");
-		Text.concat(",", Arrays.asList("a", "b", "c"));
-		Text.padString("x", 5);
-		Text.quote("quote");
-		Text.titleString("This is a title", '+', '-', '|', ' ', 50);
-		Text.bold("bold");
-		Text.concatNoEmpty(",", "a", "b", "c");
-		Text.containsAllWords("The quick brown fox", new String[] {"quick", "brown"});
-		Text.cellSize("cell");
-		Text.objectString(new ArrayList<String>());
-		Text.tableString(new String[][] {{"r1", "r2", "r3"}, {"a1", "a2", "a3"}});
-	}
+
 
 	@Test
 	public void padString() {
@@ -55,14 +34,23 @@ public class TextTest {
 	}
 
 	@Test
-	public void padCellWindow() {
-		final String input = "11111\n222\n333333";
-		final String expected = "11111 \n222   \n333333";
-		final String observed = Text.padCellWindow(input);
+	public void tableString() {
+		final String[][] table1 = new String[][] {
+				{"1.1", "1.2", "1.3"},
+				{"2.1   ", "2.2", "2.3  "},
+				{"3.1", "3.2   ", "3.3"}
+		};
+		final String[][] table2 = new String[][] {
+				{"AAA", "BBBB", "CCCCC"},
+				{"DDD", "EEEE", "FFFFF"},
+				{"GGG", "HHHH", "IIIII"}
+		};
 
-		LOG.debug("{}", observed);
-		assertEquals(expected, observed);
+		LOG.debug("{}", Text.tableString(table1, "H1", "H2", "H3"));
+		LOG.debug("{}", Text.tableString(table2, "H1", "H2", "H3"));
 	}
+
+
 
 	// Protected Methods ------------------------------------------------------------------------------ Protected Methods
 
