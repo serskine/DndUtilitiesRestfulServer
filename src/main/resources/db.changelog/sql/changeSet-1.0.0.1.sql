@@ -3,6 +3,7 @@
 -------------------------------------------------------------------------------
 CREATE TABLE "xp_threshold" (
   "id"           NUMBER(38, 0)               NOT NULL PRIMARY KEY,
+  "uid"          VARCHAR(256)                NOT NULL UNIQUE,
   "last_updated" TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "created"      TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "level"        NUMBER(38, 0)               NOT NULL UNIQUE,

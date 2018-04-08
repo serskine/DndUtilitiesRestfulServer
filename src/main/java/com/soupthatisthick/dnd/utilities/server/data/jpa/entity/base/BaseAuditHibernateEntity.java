@@ -3,7 +3,8 @@ package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-public class BaseAuditHibernateEntity extends BaseHibernateEntity {
+@MappedSuperclass
+public abstract class BaseAuditHibernateEntity extends BaseHibernateEntity {
 
     // Constants ----------------------------------------------------------------- Constants //
 
@@ -22,6 +23,7 @@ public class BaseAuditHibernateEntity extends BaseHibernateEntity {
 
     @PrePersist
     public void onPrePersistAudit() {
+        super.onPrePersistAudit();
         created = LocalDateTime.now();
         onPreUpdateAudit();
     }

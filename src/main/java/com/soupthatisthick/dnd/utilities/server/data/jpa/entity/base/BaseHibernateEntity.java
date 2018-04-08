@@ -1,11 +1,13 @@
 package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base;
 
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
+import com.soupthatisthick.dnd.utilities.server.util.podam.PodamUtil;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class BaseHibernateEntity implements Serializable {
@@ -19,6 +21,11 @@ public abstract class BaseHibernateEntity implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     @PodamExclude
     private Long id;
+
+    @Column(name = "uid", updatable = false, nullable = false)
+    @PodamExclude
+    private String uid;
+
 
     // Constructors ----------------------------------------------------------- Constructors //
 
@@ -36,6 +43,11 @@ public abstract class BaseHibernateEntity implements Serializable {
         } else {
             return HashCodeBuilder.reflectionHashCode(this, false);
         }
+    }
+
+    @PrePersist
+    public void onPrePersistAudit() {
+        uid = PodamUtil.manufacture(String.class);
     }
 
     @Override
@@ -72,4 +84,13 @@ public abstract class BaseHibernateEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
 } // End of class

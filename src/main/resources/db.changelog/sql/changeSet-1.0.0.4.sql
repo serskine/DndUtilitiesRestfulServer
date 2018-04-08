@@ -1,16 +1,16 @@
 -------------------------------------------------------------------------------
--- com.bns.et.search.app.data.jpa.entity.CrEntity
+-- com.bns.et.search.app.data.jpa.entity.NoteEntity
 -------------------------------------------------------------------------------
-CREATE TABLE "cr" (
+CREATE TABLE "note" (
   "id"           NUMBER(38, 0)               NOT NULL PRIMARY KEY,
   "uid"          VARCHAR(256)                NOT NULL UNIQUE,
   "last_updated" TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "created"      TIMESTAMP(2) WITH TIME ZONE NOT NULL,
-  "cr"           NUMBER(36, 2)               NOT NULL UNIQUE,
-  "xp"           NUMBER(38, 0)               NOT NULL UNIQUE
+  "name"         VARCHAR(256),
+  "clientUid"    VARCHAR(256)
 );
 
-CREATE SEQUENCE "xp_threshold_sg"
+CREATE SEQUENCE "topic_sg"
   MINVALUE 1
   START WITH 1
   INCREMENT BY 50

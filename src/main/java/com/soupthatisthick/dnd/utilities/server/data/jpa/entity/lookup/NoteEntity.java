@@ -4,8 +4,14 @@ import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base.Displayable
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+//@Entity
+//@Table(name = "note")
+//@SequenceGenerator(name = "sg", sequenceName = "note_sg")
 public class NoteEntity extends DisplayableEntity {
 
     // Constants ----------------------------------------------------------------- Constants //
@@ -17,7 +23,7 @@ public class NoteEntity extends DisplayableEntity {
 
     // Constructors ----------------------------------------------------------- Constructors //
 
-    private NoteEntity() {}
+    public NoteEntity() {}
     public NoteEntity(@NotEmpty String title, @NotNull String description) {
         setTitle(title);
         setDescription(description);

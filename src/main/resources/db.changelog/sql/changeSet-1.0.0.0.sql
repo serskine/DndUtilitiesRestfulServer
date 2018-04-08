@@ -3,6 +3,7 @@
 -------------------------------------------------------------------------------
 CREATE TABLE "encounter" (
   "id"           NUMBER(38, 0)               NOT NULL PRIMARY KEY,
+  "uid"          VARCHAR(256)                NOT NULL UNIQUE,
   "last_updated" TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "created"      TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "name"         VARCHAR(256)                NOT NULL
@@ -19,6 +20,7 @@ NOCACHE;
 -------------------------------------------------------------------------------
 CREATE TABLE "ally" (
   "id"           NUMBER(38, 0)               NOT NULL PRIMARY KEY,
+  "uid"          VARCHAR(256)                NOT NULL UNIQUE,
   "last_updated" TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "created"      TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "level"        INTEGER                     NOT NULL,
@@ -37,6 +39,7 @@ NOCACHE;
 -------------------------------------------------------------------------------
 CREATE TABLE "enemy" (
   "id"           NUMBER(36, 2)               NOT NULL PRIMARY KEY,
+  "uid"          VARCHAR(256)                NOT NULL UNIQUE,
   "last_updated" TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "created"      TIMESTAMP(2) WITH TIME ZONE NOT NULL,
   "level"        INTEGER                     NOT NULL,

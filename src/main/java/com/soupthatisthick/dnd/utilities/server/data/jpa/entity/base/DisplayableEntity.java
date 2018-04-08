@@ -2,7 +2,10 @@ package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class DisplayableEntity extends BaseAuditHibernateEntity {
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public abstract class DisplayableEntity extends BaseAuditHibernateEntity {
 
     // Constants ----------------------------------------------------------------- Constants //
 
