@@ -7,6 +7,7 @@ import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.M
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.MeasurementUsingXpRequest;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementResponse;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.PartyInfoRequest;
+import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -47,12 +48,14 @@ public class EncounterMeasureController {
 	@ApiOperation(value = "Determines the average party level")
 	@RequestMapping(value="/apl", method = RequestMethod.POST)
 	public ApiResponse<Integer> averagePartyLevel(@RequestBody @Valid PartyInfoRequest request) throws ServiceException {
+		LOG.debug("\n___ Average Party Level Request ___\n{}", JsonUtil.toJson(request, true));
 		return new ApiResponse<>(encounterMeasureService.getAveragePartyLevel(request));
 	}
 
 	@ApiOperation(value = "Measures encounter measure threat level using the method provided in the Dungeon Master Guide.")
 	@RequestMapping(value="/measure-dmg-xp", method = RequestMethod.POST)
 	public ApiResponse<EncounterMeasurementResponse> dmgMeasurementUsingXp(@RequestBody @Valid MeasurementUsingXpRequest request) throws ServiceException {
+		LOG.debug("\n___ DMG Xp Measurement Request ___\n{}", JsonUtil.toJson(request, true));
 		return new ApiResponse<>(encounterMeasureService.dmgMeasurement(request));
 	}
 
@@ -60,6 +63,7 @@ public class EncounterMeasureController {
 	@ApiOperation(value = "Measures encounter measure threat level using the method provided in the Dungeon Master Guide.")
 	@RequestMapping(value="/measure-dmg-cr", method = RequestMethod.POST)
 	public ApiResponse<EncounterMeasurementResponse> dmgMeasurement(@RequestBody @Valid MeasurementUsingCrRequest request) throws ServiceException {
+		LOG.debug("\n___ DMG Cr Measurement Request ___\n{}", JsonUtil.toJson(request, true));
 		return new ApiResponse<>(encounterMeasureService.dmgMeasurement(request));
 	}
 
