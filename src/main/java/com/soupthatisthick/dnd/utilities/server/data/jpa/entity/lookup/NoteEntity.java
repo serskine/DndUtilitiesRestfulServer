@@ -9,9 +9,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-//@Entity
-//@Table(name = "note")
-//@SequenceGenerator(name = "sg", sequenceName = "note_sg")
+@Entity
+@Table(name = "note")
+@SequenceGenerator(name = "sg", sequenceName = "note_sg")
 public class NoteEntity extends DisplayableEntity {
 
     // Constants ----------------------------------------------------------------- Constants //

@@ -7,10 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Nullable;
 import java.awt.print.Pageable;
-//
+
+//@Repository
 //public interface NoteRepository extends SearchableRepository<NoteEntity> {
 //
 //	// Constants ---------------------------------------------------------------------------------------------- Constants

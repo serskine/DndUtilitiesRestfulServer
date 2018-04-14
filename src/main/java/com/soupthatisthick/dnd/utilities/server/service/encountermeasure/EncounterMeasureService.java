@@ -8,6 +8,7 @@ import com.soupthatisthick.dnd.utilities.server.service.common.base.ErrorCode;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
 import com.soupthatisthick.dnd.utilities.server.service.encounterbuilder.EncounterBuilderService;
 import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.*;
+import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,8 @@ public class EncounterMeasureService {
 	 */
 	public EncounterMeasurementResponse dmgMeasurement(@NotNull MeasurementUsingXpRequest request) throws ServiceException {
 		int numAllies = request.getAllyLevels().size();
+
+		LOG.debug("\n___ DMG Measurement ___\n{}", JsonUtil.toJson(request, true));
 
 		if (numAllies<1) {
 			throw new ServiceException(ErrorCode.UNKNOWN_ERROR, "There must be at least one ally.");

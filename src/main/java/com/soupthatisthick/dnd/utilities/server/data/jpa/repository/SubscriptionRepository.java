@@ -5,9 +5,12 @@ import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.topic.Subscripti
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SubscriptionRepository extends BaseRepository<SubscriptionEntity> {
 	List<SubscriptionEntity> findByTopicUid(@NotEmpty String topicUid);
 }
