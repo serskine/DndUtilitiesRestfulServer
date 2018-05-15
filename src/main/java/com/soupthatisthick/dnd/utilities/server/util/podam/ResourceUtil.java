@@ -44,7 +44,7 @@ public class ResourceUtil {
     }
 
     public static File copyResourceToTempFile(String resourcePath) {
-        LOG.debug("Copying resource [" + resourcePath + "] into temporary file.");
+        LOG.debug("Copying resource [" + resourcePath + "] into temporary document.");
 
         if (isBlank(resourcePath)) {
             throw new IllegalArgumentException(ERROR_MSG_RESOURCE_PATH_BLANK);
@@ -54,11 +54,11 @@ public class ResourceUtil {
         try {
             file = File.createTempFile(TEMP_FILENAME_PREFIX, null);
         } catch (IOException e) {
-            LOG.error("Unable to create temp file on filesystem, check that you have write access.", e);
-            throw new RuntimeException("Unable to create temp file on filesystem, check that you have write access.");
+            LOG.error("Unable to create temp document on filesystem, check that you have write access.", e);
+            throw new RuntimeException("Unable to create temp document on filesystem, check that you have write access.");
         }
 
-        LOG.debug(String.format("Reading resource [%s] and writing to temporary file: %s.", resourcePath, file.getAbsolutePath()));
+        LOG.debug(String.format("Reading resource [%s] and writing to temporary document: %s.", resourcePath, file.getAbsolutePath()));
 
         FileOutputStream fileOutputStream;
         try {

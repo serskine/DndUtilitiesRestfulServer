@@ -5,6 +5,7 @@ import com.soupthatisthick.dnd.utilities.server.util.podam.ResourceUtil;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,7 +38,7 @@ import static com.soupthatisthick.dnd.utilities.server.util.logger.Logger.LOG;
 @PropertySources({
         @PropertySource("classpath:/com/soupthatisthick/dnd/utilities/server/config/application.properties"),
         @PropertySource(value = "classpath:/com/soupthatisthick/dnd/utilities/server/config/application-test.properties", ignoreResourceNotFound = true),
-        @PropertySource(value = "file:/opt/dnd-utilities-server/config/application-test.properties", ignoreResourceNotFound = true)
+        @PropertySource(value = "document:/opt/dnd-utilities-server/config/application-test.properties", ignoreResourceNotFound = true)
 })
 //@EnableAsync
 //@EnableAspectJAutoProxy(proxyTargetClass = false)
@@ -51,6 +52,7 @@ public class DndUtilitiesServerApplication extends SpringBootServletInitializer 
         SpringApplication.run(DndUtilitiesServerApplication.class, args);
         String banner = ResourceUtil.readResourceIntoString(RESOURCE_PATH + "/config/banner.txt");
         LOG.debug("\n{}", banner);
+        LOG.debug("Swagger URL: http://localhost:8000/swagger-ui.html");
     }
 
     @Override

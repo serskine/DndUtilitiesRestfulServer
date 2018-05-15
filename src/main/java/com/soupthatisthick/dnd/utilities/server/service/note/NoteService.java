@@ -2,7 +2,6 @@ package com.soupthatisthick.dnd.utilities.server.service.note;
 
 import com.soupthatisthick.dnd.utilities.server.api.common.SearchTermRequest;
 import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.lookup.NoteEntity;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.repository.NoteRepository;
 import com.soupthatisthick.dnd.utilities.server.service.note.model.AddNoteRequest;
 import com.soupthatisthick.dnd.utilities.server.service.note.model.DeleteNoteRequest;
 import io.swagger.annotations.ApiOperation;

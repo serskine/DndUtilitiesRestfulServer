@@ -1,7 +1,9 @@
 package com.soupthatisthick.dnd.utilities.server.api.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.soupthatisthick.dnd.utilities.server.service.common.base.BaseModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.http.HttpStatus;
 
 import javax.annotation.Nullable;
@@ -19,7 +21,13 @@ public class ApiStatus extends BaseModel {
     private HttpStatus statusCode;
 
     @NotNull
-    @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
+    @JsonFormat(
+            shape = JsonFormat.Shape.STRING,
+            pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            locale = "en_CA",
+            timezone = "AST"
+    )
+//    @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
     private LocalDateTime timeStamp = LocalDateTime.now();
 
     @NotNull
