@@ -1,5 +1,7 @@
 package com.soupthatisthick.dnd.utilities.server.data.jpa.entity.base;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -12,9 +14,11 @@ public abstract class BaseAuditHibernateEntity extends BaseHibernateEntity {
 
     @Access(AccessType.PROPERTY)
     @Column(name = "last_updated", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", locale = "en_CA", timezone = "AST")
     private LocalDateTime lastUpdated;
 
     @Column(name = "created", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", locale = "en_CA", timezone = "AST")
     private LocalDateTime created;
 
     // Constructors ----------------------------------------------------------- Constructors //
