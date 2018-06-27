@@ -2,21 +2,48 @@ package com.soupthatisthick.dnd.utilities.server.client.model.lookup;
 
 
 import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
+import uk.co.jemos.podam.common.PodamExclude;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
+@Entity
+@Table(name="ARMOR")
 public class Armor extends DaoModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sg")
+    @Column(name = "id", updatable = false, nullable = false)
+    @PodamExclude
     private Long id;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="cost")
     private String cost;
+
+    @Column(name="ac")
     private String ac;
+
+    @Column(name="strength")
     private String strengthRequirement;
+
+    @Column(name="stealth")
     private String stealthEffect;
+
+    @Column(name="weight")
     private String weight;
+
+    @Column(name="type")
     private String type;
+
+    @Column(name="description")
     private String description;
 
     public Armor(Long id, String name, String cost, String ac,
