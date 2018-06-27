@@ -1,25 +1,55 @@
 package com.soupthatisthick.dnd.utilities.server.client.model.lookup;
 
 import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
+import uk.co.jemos.podam.common.PodamExclude;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 /**
  * Created by Owner on 5/8/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-
+@Entity
+@Table(name = "CR_DETAILS")
 public class ChallengeRating extends DaoModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sg")
+    @Column(name = "id", updatable = false, nullable = false)
+    @PodamExclude
     private Long id;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="value")
     private Double value;
+
+    @Column(name="prof")
     private Integer proficiency;
+
+    @Column(name="maxAc")
     private Integer maxAc;
+
+    @Column(name="minHp")
     private Integer minHp;
+
+    @Column(name="maxHp")
     private Integer maxHp;
+
+    @Column(name="minDmg")
     private Integer minDmg;
+
+    @Column(name="maxDmg")
     private Integer maxDmg;
+
+    @Column(name="saveDc")
     private Integer saveDc;
+
+    @Column(name="xp")
     private Integer xp;
 
 
