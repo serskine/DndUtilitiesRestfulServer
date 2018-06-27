@@ -4,54 +4,131 @@ import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
 import com.soupthatisthick.dnd.utilities.server.client.model.exception.DaoModelException;
 import com.soupthatisthick.dnd.utilities.server.client.model.util.sort.Category;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.annotation.Nullable;
+import javax.persistence.*;
+import javax.persistence.Table;
 
 /**
  * Created by Owner on 5/26/2018.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
+@javax.persistence.Entity
+@Table(name = "ENTITY")
 public class Entity extends DaoModel {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sg")
+    @Column(name = "id", updatable = false, nullable = false)
+    @PodamExclude
     private Long id;
 
+    @Column(name = "parent")
     private Long parentId;
+
+    @Column(name = "metadata")
     private String metadata;
 
+    @Column(name = "ENTITY")
     private Long entityId;
+
+    @Column(name = "ARMOR")
     private Long armorId;
+
+    @Column(name = "BACKGROUND")
     private Long backgroundId;
+
+    @Column(name = "CR_DETAILS")
     private Long challengeRatingId;
+
+    @Column(name = "CHARACTER_ADVANCEMENT")
     private Long characterAdvancementId;
+
+    @Column(name = "CONDITIONS")
     private Long conditionId;
+
+    @Column(name = "CONTAINERS")
     private Long containerId;
+
+    @Column(name = "CUSTOM_MONSTERS")
     private Long customMonsterId;
+
+    @Column(name = "DAO_SEARCHABLE")
     private Long searchableDaoId;
+
+    @Column(name = "EDITABLE_SPELLS")
     private Long spellId;
+
+    @Column(name = "EQUIPMENT")
     private Long equipmentId;
+
+    @Column(name = "FEATS")
     private Long featId;
+
+    @Column(name = "GODS")
     private Long godId;
+
+    @Column(name = "HEIGHT_WEIGHT")
     private Long heightWeightId;
+
+    @Column(name = "LANGUAGES")
     private Long languageId;
+
+    @Column(name = "LIFESTYLE")
     private Long lifestyleId;
+
+    @Column(name = "LISTS")
     private Long listId;
+
+    @Column(name = "LIST_ITEMS")
     private Long listItemId;
+
+    @Column(name = "MAGIC_ITEMS")
     private Long magicItemId;
+
+    @Column(name = "MC")
     private Long mcId;
+
+    @Column(name = "MONSTERS")
     private Long monsterId;
+
+    @Column(name = "MOUNTS")
     private Long mountId;
+
+    @Column(name = "MS")
     private Long msId;
+
+    @Column(name = "MULTICLASSING")
     private Long multiclassingId;
+
+    @Column(name = "NOTES")
     private Long noteId;
+
+    @Column(name = "ROLL_TABLE")
     private Long rollTableId;
+
+    @Column(name = "ROLL_TABLE_ENTRY")
     private Long rollTableEntryId;
+
+    @Column(name = "SERVICE")
     private Long serviceId;
+
+    @Column(name = "SPELL_SLOTS_MULTICLASS")
     private Long multiclassSpellSlotsId;
+
+    @Column(name = "STANDARD_MONSTERS")
     private Long standardMonsterId;
+
+    @Column(name = "TRADE_GOODS")
     private Long tradeGoodId;
+
+    @Column(name = "WATERBORNE_VECHICLES")
     private Long waterborneVechicleId;
+
+    @Column(name = "WEAPONS")
     private Long weaponId;
 
+    // TODO: Add references to the season and adventure?
 
     public Entity() {
 
