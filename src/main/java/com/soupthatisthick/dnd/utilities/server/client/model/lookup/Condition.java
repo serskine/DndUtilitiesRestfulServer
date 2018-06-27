@@ -2,38 +2,36 @@ package com.soupthatisthick.dnd.utilities.server.client.model.lookup;
 
 import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
 
-// import org.greenrobot.greendao.annotation.Entity;
-// import org.greenrobot.greendao.annotation.Id;
-// import org.greenrobot.greendao.annotation.Property;
-// import org.greenrobot.greendao.annotation.Generated;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
 
-// @Entity(nameInDb = "CONDITIONS")
+@Entity
+@Table(name = "CONDITIONS")
 public class Condition extends DaoModel {
 
 
-    // @Id
-    // @Property(nameInDb = "id")
+    @Id
+    @Column(name = "id")
     private Long id;
 
-    // @Property(nameInDb = "name")
+    @Column(name = "name")
     private String name;
 
-    // @Property(nameInDb = "description")
+    @Column(name = "description")
     private String description;
 
-    // @Generated(hash = 1324086194)
     public Condition(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    // @Generated(hash = 1179462728)
     public Condition() {
     }
 
