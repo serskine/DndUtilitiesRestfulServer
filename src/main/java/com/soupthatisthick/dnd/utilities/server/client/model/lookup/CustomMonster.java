@@ -1,8 +1,12 @@
 package com.soupthatisthick.dnd.utilities.server.client.model.lookup;
 
 import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
+import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.annotation.Nullable;
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Locale;
 
 
@@ -10,36 +14,98 @@ import java.util.Locale;
  * Created by Owner on 1/26/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
+@Entity
+@Table(name = "CUSTOM_MONSTERS")
 public class CustomMonster extends DaoModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sg")
+    @Column(name = "id", updatable = false, nullable = false)
+    @PodamExclude
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "type")
     private String type;
+
+    @Column(name = "alignment")
     private String alignment;
+
+    @Column(name = "ac")
     private int ac;
+
+    @Column(name = "acType")
     private String acType;
+
+    @Column(name = "hp")
     private String hp;
+
+    @Column(name = "hd")
     private String hd;
+
+    @Column(name = "speed")
     private String speed;
+
+    @Column(name = "str")
     private int strength;
+
+    @Column(name = "dex")
     private int dexterity;
+
+    @Column(name = "con")
     private int constitution;
+
+    @Column(name = "int")
     private int intelligence;
+
+    @Column(name = "wis")
     private int wisdom;
+
+    @Column(name = "cha")
     private int charisma;
+
+    @Column(name = "saves")
     private String saves;
+
+    @Column(name = "skills")
     private String skills;
+
+    @Column(name = "dmgResistance")
     private String dmgResistance;
+
+    @Column(name = "dmgImmunity")
     private String dmgImmunity;
+
+    @Column(name = "conditionImmunity")
     private String conditionImmunity;
+
+    @Column(name = "senses")
     private String senses;
+
+    @Column(name = "languages")
     private String languages;
+
+    @Column(name = "cr")
     private String cr;
+
+    @Column(name = "xp")
     private int xp;
+
+    @Column(name = "abilities")
     private String abilities;
+
+    @Column(name = "actions")
     private String actions;
+
+    @Column(name = "legendary")
     private String legendaryActions;
+
+    @Column(name = "other")
     private String other;
+
+    @Column(name = "source")
     private String source;
 
 
