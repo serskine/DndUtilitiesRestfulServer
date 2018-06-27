@@ -1,8 +1,8 @@
 package com.soupthatisthick.dnd.utilities.server.functional;
 
 
-import com.soupthatisthick.dnd.utilities.server.service.testing.TestingService;
-import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
+import com.soupthatisthick.dnd.utilities.server.testing.TestingService;
+import com.soupthatisthick.dnd.utilities.server.testing.model.exception.TestingServiceException;
 import com.soupthatisthick.dnd.utilities.server.util.BaseSpringBootTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

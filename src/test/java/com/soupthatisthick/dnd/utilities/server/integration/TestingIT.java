@@ -1,9 +1,9 @@
 package com.soupthatisthick.dnd.utilities.server.integration;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
-import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogLevel;
-import com.soupthatisthick.dnd.utilities.server.service.testing.model.LogMessageRequest;
+import com.soupthatisthick.dnd.utilities.server.common.model.messages.ApiResponse;
+import com.soupthatisthick.dnd.utilities.server.testing.model.LogLevel;
+import com.soupthatisthick.dnd.utilities.server.testing.model.LogMessageRequest;
 import com.soupthatisthick.dnd.utilities.server.util.AssertUtil;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.junit.Test;

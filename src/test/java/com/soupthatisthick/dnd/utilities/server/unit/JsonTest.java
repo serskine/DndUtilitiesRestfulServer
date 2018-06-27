@@ -1,6 +1,6 @@
 package com.soupthatisthick.dnd.utilities.server.unit;
 
-import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
+import com.soupthatisthick.dnd.utilities.server.common.model.messages.ApiResponse;
 import com.soupthatisthick.dnd.utilities.server.util.podam.PodamUtil;
 import org.junit.Test;
 

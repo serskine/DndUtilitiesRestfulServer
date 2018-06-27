@@ -1,10 +1,9 @@
 package com.soupthatisthick.dnd.utilities.server.functional;
 
-import com.soupthatisthick.dnd.utilities.server.api.common.SearchTermRequest;
-import com.soupthatisthick.dnd.utilities.server.data.jpa.entity.lookup.NoteEntity;
-import com.soupthatisthick.dnd.utilities.server.service.note.NoteService;
-import com.soupthatisthick.dnd.utilities.server.service.note.model.AddNoteRequest;
-import com.soupthatisthick.dnd.utilities.server.service.note.model.DeleteNoteRequest;
+import com.soupthatisthick.dnd.utilities.server.common.model.messages.SearchTermRequest;
+import com.soupthatisthick.dnd.utilities.server.lookup.NoteEntity;
+import com.soupthatisthick.dnd.utilities.server.note.NoteService;
+import com.soupthatisthick.dnd.utilities.server.note.model.AddNoteRequest;
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import com.soupthatisthick.dnd.utilities.server.util.podam.PodamUtil;
 import org.junit.Test;

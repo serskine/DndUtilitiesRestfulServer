@@ -20,11 +20,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${server.environment}")
     private String environment;
 
+    private static final String ADMIN = "admin";
+    private static final String USER = "user";
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll();
         http.csrf().disable();
+    }
+
+    /**
+     * A global bean that will determine what users have what permissions in memory.
+     * @param auth is the authentication
+     * @throws Exception if we fail authentication
+     */
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("SoupThatIsThick").password("jcolaspuaftew").roles(ADMIN, USER)
+            .and()
+                .withUser("User").password("1234").roles(USER);
     }
 
     @Override

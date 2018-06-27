@@ -1,9 +1,9 @@
 package com.soupthatisthick.dnd.utilities.server.functional;
 
-import com.soupthatisthick.dnd.utilities.server.service.common.base.ServiceException;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.EncounterMeasureService;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.MeasurementUsingXpRequest;
-import com.soupthatisthick.dnd.utilities.server.service.encountermeasure.model.EncounterMeasurementResponse;
+import com.soupthatisthick.dnd.utilities.server.common.model.ServiceException;
+import com.soupthatisthick.dnd.utilities.server.encounter.service.EncounterMeasureService;
+import com.soupthatisthick.dnd.utilities.server.encounter.model.MeasurementUsingXpRequest;
+import com.soupthatisthick.dnd.utilities.server.encounter.model.EncounterMeasurementResponse;
 import com.soupthatisthick.dnd.utilities.server.util.BaseSpringBootTest;
 import org.junit.Test;
 import org.slf4j.Logger;

@@ -1,8 +1,8 @@
 package com.soupthatisthick.dnd.utilities.server.util;
 
 import com.mashape.unirest.http.HttpResponse;
-import com.soupthatisthick.dnd.utilities.server.api.common.ApiResponse;
-import com.soupthatisthick.dnd.utilities.server.api.common.ApiStatus;
+import com.soupthatisthick.dnd.utilities.server.common.model.messages.ApiResponse;
+import com.soupthatisthick.dnd.utilities.server.common.model.messages.ApiStatus;
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import com.soupthatisthick.dnd.utilities.server.util.podam.PodamUtil;
 import org.springframework.http.HttpStatus;

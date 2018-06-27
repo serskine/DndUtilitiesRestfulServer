@@ -1,7 +1,7 @@
 package com.soupthatisthick.dnd.utilities.server.util;
 
-import com.soupthatisthick.dnd.utilities.server.service.testing.TestingService;
-import com.soupthatisthick.dnd.utilities.server.service.testing.model.exception.TestingServiceException;
+import com.soupthatisthick.dnd.utilities.server.testing.TestingService;
+import com.soupthatisthick.dnd.utilities.server.testing.model.exception.TestingServiceException;
 import com.soupthatisthick.dnd.utilities.server.spring.DndUtilitiesServerApplication;
 import com.soupthatisthick.dnd.utilities.server.util.json.JsonUtil;
 import org.junit.Before;

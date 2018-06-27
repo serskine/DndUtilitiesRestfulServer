@@ -48,4 +48,13 @@
                  splitStatements="true"
                  stripComments="true"/>
     </changeSet>
+    <changeSet id="1.0.0.5" author="Stuart Erskine">
+        <sqlFile dbms="h2, oracle"
+                 path="/db.changelog/sql/changeSet-1.0.0.5.sql"
+                 relativeToChangelogFile="false"
+                 encoding="UTF-8"
+                 endDelimiter=";"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>
