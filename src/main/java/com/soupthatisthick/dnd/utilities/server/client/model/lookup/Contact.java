@@ -7,7 +7,7 @@ import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
  * Created by Owner on 5/1/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
-
+// TODO: Figure out where to put this. It's in a seperate database on the client
 public class Contact extends DaoModel {
 
     private String name;
