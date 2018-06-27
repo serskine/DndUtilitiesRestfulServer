@@ -1,9 +1,6 @@
 package com.soupthatisthick.dnd.utilities.server.client.model.util.sort;
 
-import android.support.annotation.NonNull;
-
 import java.util.Comparator;
-import java.util.Locale;
 
 /**
  * Created by Owner on 5/27/2017.

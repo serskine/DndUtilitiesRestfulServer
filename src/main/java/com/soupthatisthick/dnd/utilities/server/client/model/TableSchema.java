@@ -1,8 +1,6 @@
 package com.soupthatisthick.dnd.utilities.server.client.model;
 
-import android.support.annotation.NonNull;
-
-import com.soupthatisthick.encounterbuilder.model.FieldSchema;
+import com.sun.istack.internal.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +16,7 @@ public class TableSchema {
 
     private final Map<String, FieldSchema> fields = new HashMap<String, FieldSchema>();
 
-    public TableSchema(@NonNull String name)
+    public TableSchema(@NotNull String name)
     {
         this.name = name;
     }
@@ -33,7 +31,7 @@ public class TableSchema {
         return fields.get(fieldName);
     }
 
-    public void setField(@NonNull String fieldName, @NonNull FieldSchema fieldSchema)
+    public void setField(@NotNull String fieldName, @NotNull FieldSchema fieldSchema)
     {
         fields.put(fieldName, fieldSchema);
     }
@@ -69,7 +67,7 @@ public class TableSchema {
         return name;
     }
 
-    public void setName(@NonNull String name)
+    public void setName(@NotNull String name)
     {
         this.name = name;
     }

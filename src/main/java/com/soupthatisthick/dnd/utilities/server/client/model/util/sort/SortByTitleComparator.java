@@ -1,24 +1,7 @@
 package com.soupthatisthick.dnd.utilities.server.client.model.util.sort;
 
-import android.support.annotation.NonNull;
-
-import com.soupthatisthick.encounterbuilder.model.lookup.ChallengeRating;
-import com.soupthatisthick.encounterbuilder.model.lookup.Armor;
-import com.soupthatisthick.encounterbuilder.model.lookup.Background;
-import com.soupthatisthick.encounterbuilder.model.lookup.Condition;
-import com.soupthatisthick.encounterbuilder.model.lookup.CustomMonster;
-import com.soupthatisthick.encounterbuilder.model.lookup.Entity;
-import com.soupthatisthick.encounterbuilder.model.lookup.Equipment;
-import com.soupthatisthick.encounterbuilder.model.lookup.Feat;
-import com.soupthatisthick.encounterbuilder.model.lookup.God;
-import com.soupthatisthick.encounterbuilder.model.lookup.Level;
-import com.soupthatisthick.encounterbuilder.model.lookup.LifeStyle;
-import com.soupthatisthick.encounterbuilder.model.lookup.MagicItem;
-import com.soupthatisthick.encounterbuilder.model.lookup.Mount;
-import com.soupthatisthick.encounterbuilder.model.lookup.Note;
-import com.soupthatisthick.encounterbuilder.model.lookup.Spell;
-import com.soupthatisthick.encounterbuilder.model.lookup.StandardMonster;
-import com.soupthatisthick.encounterbuilder.model.lookup.Weapon;
+import com.soupthatisthick.dnd.utilities.server.client.model.lookup.*;
+import com.sun.istack.internal.NotNull;
 
 import java.util.Comparator;
 
@@ -73,7 +56,7 @@ public class SortByTitleComparator implements Comparator<Object> {
         return getTitle(o1).compareTo(getTitle(o2));
     }
 
-    private static String getTitle(@NonNull Object obj)
+    private static String getTitle(@NotNull Object obj)
     {
         Category category = Category.parse(obj);
         switch(category)

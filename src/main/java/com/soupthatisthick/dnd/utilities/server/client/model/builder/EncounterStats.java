@@ -1,6 +1,6 @@
 package com.soupthatisthick.dnd.utilities.server.client.model.builder;
 
-import android.support.annotation.NonNull;
+import com.sun.istack.internal.NotNull;
 
 /**
  * Created by Owner on 5/29/2017.
@@ -20,7 +20,7 @@ public class EncounterStats {
 
     public EncounterStats(
         int numAllies,
-        @NonNull XpThresholds xpThresholds,
+        @NotNull XpThresholds xpThresholds,
         int numEnemies,
         int unmodifiedTotalEnemyXp)
     {

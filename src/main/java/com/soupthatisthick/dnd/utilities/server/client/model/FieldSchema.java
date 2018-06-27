@@ -1,8 +1,7 @@
 package com.soupthatisthick.dnd.utilities.server.client.model;
 
-import android.support.annotation.NonNull;
-
-import com.soupthatisthick.encounterbuilder.util.Text;
+import com.soupthatisthick.dnd.utilities.server.util.text.Text;
+import com.sun.istack.internal.NotNull;
 
 /**
  * Created by Owner on 4/17/2017.
@@ -14,7 +13,7 @@ public class FieldSchema {
         return type;
     }
 
-    public void setType(@NonNull Type type) {
+    public void setType(@NotNull Type type) {
         this.type = type;
     }
 
@@ -69,7 +68,7 @@ public class FieldSchema {
      * @param autoIncrement
      * @param unique
      */
-    public FieldSchema(@NonNull Type type, boolean notNull, boolean primaryKey, boolean autoIncrement, boolean unique)
+    public FieldSchema(@NotNull Type type, boolean notNull, boolean primaryKey, boolean autoIncrement, boolean unique)
     {
         this.type = type;
         this.notNull = notNull;
@@ -87,7 +86,7 @@ public class FieldSchema {
      * - Values need not be unique
      * @param type
      */
-    public FieldSchema(@NonNull Type type)
+    public FieldSchema(@NotNull Type type)
     {
         this(type, false, false, false, false);
     }
