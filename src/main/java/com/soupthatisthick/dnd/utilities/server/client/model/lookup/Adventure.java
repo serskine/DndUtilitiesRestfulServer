@@ -1,16 +1,41 @@
 package com.soupthatisthick.dnd.utilities.server.client.model.lookup;
 
 import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
+import uk.co.jemos.podam.common.PodamExclude;
 
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ADVENTURE")
 public class Adventure extends DaoModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sg")
+    @Column(name = "id", updatable = false, nullable = false)
+    @PodamExclude
     private Long id;
+
+    @Column(name="code")
     private String code;
+
+    @Column(name="levelBand")
     private String levelBand;
+
+    @Column(name="runtimeHours")
     private String runtimeHours;
+
+    @Column(name="title")
     private String title;
+
+    @Column(name="notes")
     private String notes;
+
+    @Column(name="seasonId")
     private Long seasonId;
+
+    @Column(name="description")
     private String description;
 
     @Override
