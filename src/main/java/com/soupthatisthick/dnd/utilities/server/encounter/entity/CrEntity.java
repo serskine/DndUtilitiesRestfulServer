@@ -2,13 +2,11 @@ package com.soupthatisthick.dnd.utilities.server.encounter.entity;
 
 import com.soupthatisthick.dnd.utilities.server.common.entity.BaseHibernateEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cr")
+
 @SequenceGenerator(name = "sg", sequenceName = "cr_sg")
 public class CrEntity extends BaseHibernateEntity {
 
