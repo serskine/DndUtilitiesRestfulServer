@@ -10,7 +10,6 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
 	}
 }
 
@@ -74,4 +73,7 @@ dependencies {
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework.security:spring-security-test'
+
+    // https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin
+    compile group: 'io.fabric8', name: 'docker-maven-plugin', version: '0.14.1'
 }

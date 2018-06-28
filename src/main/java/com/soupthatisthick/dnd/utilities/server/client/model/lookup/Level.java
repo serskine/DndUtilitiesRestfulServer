@@ -1,14 +1,25 @@
 package com.soupthatisthick.dnd.utilities.server.client.model.lookup;
 
 import com.soupthatisthick.dnd.utilities.server.client.model.DaoModel;
+import uk.co.jemos.podam.common.PodamExclude;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 /**
  * Created by Owner on 5/5/2017.
  * Copyright of Stuart Marr Erskine, all rights reserved.
  */
+//@Entity
+//@Table(name="LEVEL_DETAILS", schema="encounters")
 public class Level extends DaoModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sg")
+    @Column(name = "id", updatable = false, nullable = false)
+    @PodamExclude
     private Long id;
     private String name;
     private Integer xp;
